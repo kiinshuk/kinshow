@@ -5,7 +5,7 @@ import { getBlogPost, getBlogPosts } from '../blogData';
 export default function BlogPost() {
   const { slug } = useParams();
   const post = getBlogPost(slug);
-
+ 
   if (!post) {
     return (
       <main className="page">
