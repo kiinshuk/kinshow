@@ -1,27 +1,43 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { ToastProvider } from "./components/Toast";
-import { useWatchlist } from "./store";
-import Navbar from "./components/Navbar";
-import CookieConsent from "./components/CookieConsent";
-import Home from "./pages/Home";
-import Movies from "./pages/Movies";
-import TVShows from "./pages/TVShows";
-import Detail from "./pages/Detail";
-import Player from "./pages/Player";
-import Watchlist from "./pages/Watchlist";
-import Profile from "./pages/Profile";
-import Explore from "./pages/Explore";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Privacy from "./pages/Privacy";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { ToastProvider } from './components/Toast';
+import { useWatchlist } from './store';
+import Navbar from './components/Navbar';
+import CookieConsent from './components/CookieConsent';
+import ErrorBoundary from './components/ErrorBoundary';
+import Home from './pages/Home';
+import Movies from './pages/Movies';
+import TVShows from './pages/TVShows';
+import Detail from './pages/Detail';
+import Player from './pages/Player';
+import Watchlist from './pages/Watchlist';
+import Profile from './pages/Profile';
+import Explore from './pages/Explore';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import { useEffect } from 'react';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    });
+  }, [pathname]);
+  return null;
+}
 
 function AppInner() {
   const { list } = useWatchlist();
-  return (
+  return ( 
     <>
       <Navbar watchlistCount={list.length} />
+      <ErrorBoundary>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
@@ -37,6 +53,7 @@ function AppInner() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
+      </ErrorBoundary>
       <footer className="footer">
         <div className="footer-inner">
           <div className="footer-grid">
@@ -52,36 +69,19 @@ function AppInner() {
             <div className="footer-col">
               <h4 className="footer-heading">Browse</h4>
               <ul className="footer-links">
-                <li>
-                  <Link to={"/movies"}>Movies</Link>
-                </li>
-
-                <li>
-                  <Link to={"/tv"}>TV Shows</Link>
-                </li>
-                <li>
-                  <Link to={"/explore"}>Explore</Link>
-                </li>
-                <li>
-                  <Link to={"/watchlist"}>My List</Link>
-                </li>
+                <li><Link to="/movies">Movies</Link></li>
+                <li><Link to="/tv">TV Shows</Link></li>
+                <li><Link to="/explore">Explore</Link></li>
+                <li><Link to="/watchlist">My List</Link></li>
               </ul>
             </div>
             <div className="footer-col">
               <h4 className="footer-heading">Company</h4>
               <ul className="footer-links">
-                <li>
-                  <Link to={"/about"}>About</Link>
-                </li>
-                <li>
-                  <Link to={"/blog"}>Blog</Link>
-                </li>
-                <li>
-                  <Link to={"/contact"}>Contact</Link>
-                </li>
-                <li>
-                  <Link to={"/privacy"}>Privacy Policy</Link>
-                </li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/blog">Blog</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
+                <li><Link to="/privacy">Privacy Policy</Link></li>
               </ul>
             </div>
             <div className="footer-col">
@@ -133,6 +133,7 @@ function AppInner() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <ToastProvider>
         <AppInner />
       </ToastProvider>

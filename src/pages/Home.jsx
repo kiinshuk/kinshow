@@ -1,7 +1,7 @@
 import Hero from '../components/Hero';
 import ContentRail from '../components/ContentRail';
 import RecentlyViewed from '../components/RecentlyViewed';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { tvmazeMultipleShows, MOVIES } from '../api';
 import { SEO, websiteSchema, StructuredData, organizationSchema } from '../components/SEO';
 
@@ -25,6 +25,10 @@ export default function Home() {
   const [newMovies, setNewMovies] = useState({ items: [], loading: true });
   const [topMovies, setTopMovies] = useState({ items: [], loading: true });
 
+  const trendingTvItems = useMemo(() => trendingTv.items.map(s => ({ ...s, media_type: 'tv' })), [trendingTv.items]);
+  const webSchema = useMemo(() => websiteSchema(), []);
+  const orgSchema = useMemo(() => organizationSchema(), []);
+
   useEffect(() => {
     setMovieItems({ items: MOVIES.slice(0, 12).map(m => ({ ...m, media_type: 'movie' })), loading: false });
     setNewMovies({ items: MOVIES.filter(m => parseInt(m.year) >= 2023).map(m => ({ ...m, media_type: 'movie' })), loading: false });
@@ -34,13 +38,13 @@ export default function Home() {
   return (
     <main className="page">
       <SEO title="Kinshow" description="Discover movies and TV shows on Kinshow. Browse ratings, cast, reviews, and find where to stream. Free cinema discovery with 80+ curated films and trending series." url="https://kinshow.vercel.app/" />
-      <StructuredData data={websiteSchema()} />
-      <StructuredData data={organizationSchema()} />
+      <StructuredData data={webSchema} />
+      <StructuredData data={orgSchema} />
       <Hero />
       <RecentlyViewed />
       <div className="rails">
         <ContentRail title="Popular Movies" items={movieItems.items} loading={movieItems.loading} />
-        <ContentRail title="Trending TV Shows" items={trendingTv.items.map(s => ({ ...s, media_type: 'tv' }))} loading={trendingTv.loading} />
+        <ContentRail title="Trending TV Shows" items={trendingTvItems} loading={trendingTv.loading} />
         <ContentRail title="New Releases" items={newMovies.items} loading={newMovies.loading} />
         <ContentRail title="Top Rated Films" items={topMovies.items} loading={topMovies.loading} />
       </div>

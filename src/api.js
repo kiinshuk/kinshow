@@ -5,11 +5,16 @@ const OMDB = 'https://www.omdbapi.com';
 const PRE = 'lg_';
 const TTL = 24 * 60 * 60 * 1000;
 
-// Clear old OMDb search cache on load
+// Clear old OMDb search cache older than 1 hour
 try {
   for (let i = localStorage.length - 1; i >= 0; i--) {
     const key = localStorage.key(i);
-    if (key && key.startsWith(PRE + 'omdb_s_')) localStorage.removeItem(key);
+    if (key && key.startsWith(PRE + 'omdb_s_')) {
+      try {
+        const d = JSON.parse(localStorage.getItem(key));
+        if (d && Date.now() - d.t > 3600000) localStorage.removeItem(key);
+      } catch { localStorage.removeItem(key); }
+    }
   }
 } catch {}
 
@@ -226,9 +231,11 @@ export async function tvmazeMultipleShows(ids) {
 
 export async function searchMulti(q) {
   if (!q?.trim()) return { results: [] };
-  const [tvResults] = await Promise.all([tvmazeSearch(q)]);
-  const movieResults = MOVIES.filter(m => m.title.toLowerCase().includes(q.toLowerCase()));
-  const items = [...movieResults.map(m => ({ ...m, media_type: 'movie' })), ...tvResults.map(s => ({ ...s, media_type: 'tv' }))];
+  const [tvResults, omdbResults] = await Promise.all([tvmazeSearch(q), omdbSearchMulti(q)]);
+  const localMovies = MOVIES.filter(m => m.title.toLowerCase().includes(q.toLowerCase())).map(m => ({ ...m, media_type: 'movie' }));
+  const seenIds = new Set(localMovies.map(m => m.id));
+  const extraMovies = omdbResults.filter(m => !seenIds.has(m.id));
+  const items = [...localMovies, ...extraMovies, ...tvResults.map(s => ({ ...s, media_type: 'tv' }))];
   return { results: items };
 }
 

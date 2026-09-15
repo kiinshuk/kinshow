@@ -61,7 +61,7 @@ export default function Detail() {
         omdbEpisodes(data.imdbID, seasonNum).then(setEpisodes);
       }
     });
-  }, [data, seasonNum, type, id]);
+  }, [data?.tvmazeId, data?.imdbID, seasonNum, type, id]);
 
   if (loading) return <main className="page detail"><SkeletonDetail /></main>;
   if (!data) return <main className="page detail"><div className="empty-state"><h3>Not found</h3><p>This title could not be loaded.</p><Link to="/" className="btn btn--secondary">Go Home</Link></div></main>;

@@ -15,7 +15,7 @@ export default function ContentRail({ title, items = [], viewAll, loading }) {
     el.addEventListener('scroll', check, { passive: true });
     window.addEventListener('resize', check);
     return () => { el.removeEventListener('scroll', check); window.removeEventListener('resize', check); };
-  }, [items]);
+  }, [items.length, loading]);
 
   const scroll = (dir) => {
     const el = ref.current;

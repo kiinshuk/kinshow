@@ -16,8 +16,8 @@ export function SEO({ title, description, image, url, type = 'website', schema }
       <link rel="canonical" href={u} />
       <meta name="robots" content="index, follow" />
       <meta name="theme-color" content="#c8102e" />
+      <meta name="mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="format-detection" content="telephone=no" />
       <link rel="alternate" hrefLang="en-in" href={u} />
       <link rel="alternate" hrefLang="x-default" href={u} />
