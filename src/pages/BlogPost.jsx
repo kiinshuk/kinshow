@@ -9,13 +9,7 @@ export default function BlogPost() {
   if (!post) {
     return (
       <main className="page">
-        <div className="empty-state">
-        <EmptyState 
-  title="No Results Found"
-  description="We couldn't find the data you were looking for."
-  action={<Link to="/blog" className="btn btn--secondary">Back to Blog</Link>}
-/>
-        </div>
+        <EmptyState title="Article Not Found" description="This blog post could not be found." action={<Link to="/blog" className="btn btn--secondary">Back to Blog</Link>} />
       </main>
     );
   }

@@ -106,12 +106,7 @@ export default function Detail() {
   }, [data?.tvmazeId, data?.imdbID, seasonNum, type, id]);
 
   if (loading) return <main className="page detail"><SkeletonDetail /></main>;
-  if (!data) return <main className="page detail"><div className="empty-state">
-   <EmptyState 
-  title="No Results Found"
-  description="We couldn't find the data you were looking for."
-  action={<Link to="/" className="btn btn--secondary">Go Home</Link>}
-/></div></main>;
+  if (!data) return <main className="page detail"><EmptyState title="No Results Found" description="This title could not be loaded." action={<Link to="/" className="btn btn--secondary">Go Home</Link>} /></main>;
 
   const title = t(data);
   const imdbId = data.imdbID || null;
