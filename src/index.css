@@ -831,8 +831,6 @@ ul, ol { list-style: none; }
 
 @media (max-width: 600px) { .watchlist-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; padding: 0 16px; } }
 
-
-
 .watchlist-item--removing {
   opacity: 0;
   transform: scale(0.92) translateY(8px);

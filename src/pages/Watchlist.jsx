@@ -19,11 +19,11 @@ export default function Watchlist() {
   const removeItem = (item) => {
     setRemovingId(item.id);
     setTimeout(() => {
-      remove(item.id); 
+      remove(item.id);
       toast(`${item.title} removed from My List`);
       setRemovingId(null);
     }, 300);
-};
+  };
 
   if (list.length === 0) {
     return (
