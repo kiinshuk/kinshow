@@ -682,29 +682,50 @@ ul, ol { list-style: none; }
 
 .episodes { display: flex; flex-direction: column; gap: 10px; }
 .ep-card {
+  position: relative;
   display: flex; gap: 16px; width: 100%;
   padding: 12px; border-radius: var(--radius-md);
   background: var(--surface); border: 1px solid var(--border);
   text-align: left;
-  transition: border-color var(--duration) var(--ease), background var(--duration) var(--ease);
+  transition: transform var(--duration-md) var(--ease-spring),
+              border-color var(--duration) var(--ease),
+              background var(--duration) var(--ease),
+              box-shadow var(--duration-md) var(--ease);
 }
-.ep-card:hover { border-color: var(--border-strong); background: var(--surface-hover); }
+.ep-card:hover {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(74, 158, 111, 0.2), 0 0 24px var(--accent-subtle);
+}
 .ep-card-thumb {
   position: relative; flex-shrink: 0; width: 160px; aspect-ratio: 16/9;
   border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-raised);
 }
-.ep-card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.ep-card-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--duration-md) var(--ease);
+}
+.ep-card:hover .ep-card-thumb img { transform: scale(1.06); }
 .ep-card-thumb-empty { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted); background: var(--surface); }
 .ep-card-play {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   font-size: 24px; color: white;
-  opacity: 0; transition: opacity var(--duration) var(--ease);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+  transform: scale(0.85);
+  pointer-events: none;
 }
-.ep-card:hover .ep-card-play { opacity: 1; }
+.ep-card:hover .ep-card-play {
+  opacity: 1;
+  transform: scale(1.1);
+}
 .ep-card-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .ep-card-header { display: flex; align-items: baseline; gap: 8px; }
 .ep-card-num { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em; }
-.ep-card-title { font-size: 14px; font-weight: 500; }
+.ep-card-title { font-size: 14px; font-weight: 500; transition: color var(--duration) var(--ease); }
+.ep-card:hover .ep-card-title { color: #fff; }
 .ep-card-date, .ep-card-runtime, .ep-card-rating { font-size: 12px; color: var(--text-muted); }
 .ep-card-rating { color: var(--gold); font-weight: 600; }
 .ep-card-meta { display: flex; gap: 12px; }
