@@ -45,9 +45,9 @@ export default function Detail() {
     } else if (e.key === 'ArrowRight') {
       e.preventDefault();
       el.scrollBy({ left: 100, behavior: 'smooth' });
-    };
+    }
   };
-    
+
   useEffect(() => {
     const el = castScrollRef.current;
     if (!el) return;
