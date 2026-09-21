@@ -209,9 +209,6 @@ ul, ol { list-style: none; }
   .nav-links, .nav-actions { display: none; }
   .mobile-nav { display: flex; }
   .page { padding-bottom: 72px !important; }
-  button.scroll-to-top-btn {
-    display: none;
-  }
 }
 
 /* ─── SEARCH OVERLAY ──────────────────────── */
@@ -414,8 +411,9 @@ ul, ol { list-style: none; }
   bottom: 24px;
   right: 24px;
   z-index: 400;
+  background: var(--accent);
   border-color: var(--accent);
-  color: var(--accent);
+  color: #000;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
@@ -427,8 +425,8 @@ ul, ol { list-style: none; }
 }
 
 .scroll-to-top-btn:hover {
-  background: var(--accent);
-  color: white;
+  background: var(--accent-hover);
+  color: #000;
   transform: translateY(-2px);
 }
 
