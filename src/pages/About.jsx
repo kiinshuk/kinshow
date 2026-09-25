@@ -112,6 +112,23 @@ const TECHNOLOGIES = [
   "Vercel Analytics",
 ];
 
+const CONTRIBUTORS = [
+  { login: "kiinshuk", avatar: "https://avatars.githubusercontent.com/u/84260655?v=4", contributions: 103, owner: true },
+  { login: "AyushVerma04", avatar: "https://avatars.githubusercontent.com/u/148244088?v=4", contributions: 4 },
+  { login: "priyanshu-purohit", avatar: "https://avatars.githubusercontent.com/u/234338887?v=4", contributions: 4 },
+  { login: "Salarmemon", avatar: "https://avatars.githubusercontent.com/u/142799802?v=4", contributions: 3 },
+  { login: "ABHISHE9936e", avatar: "https://avatars.githubusercontent.com/u/241580558?v=4", contributions: 2 },
+  { login: "KhemkaAkshat", avatar: "https://avatars.githubusercontent.com/u/144114211?v=4", contributions: 2 },
+  { login: "sweranauman-sketch", avatar: "https://avatars.githubusercontent.com/u/272179517?v=4", contributions: 2 },
+  { login: "githarshil", avatar: "https://avatars.githubusercontent.com/u/170957406?v=4", contributions: 2 },
+  { login: "krsnaa04", avatar: "https://avatars.githubusercontent.com/u/194541187?v=4", contributions: 2 },
+  { login: "vianavitor-dev", avatar: "https://avatars.githubusercontent.com/u/176242424?v=4", contributions: 2 },
+  { login: "7-Tarun", avatar: "https://avatars.githubusercontent.com/u/214530696?v=4", contributions: 1 },
+  { login: "Paniv45", avatar: "https://avatars.githubusercontent.com/u/140896774?v=4", contributions: 1 },
+  { login: "Piyush-NST", avatar: "https://avatars.githubusercontent.com/u/153071113?v=4", contributions: 1 },
+  { login: "geminators", avatar: "https://avatars.githubusercontent.com/u/277517169?v=4", contributions: 1 },
+];
+
 export default function About() {
   return (
     <main className="page">
@@ -257,6 +274,57 @@ export default function About() {
           </div>
         </section>
 
+        {/* CONTRIBUTORS */}
+        <section className="about-section">
+          <div className="about-section-heading">
+            <h2 className="about-section-title">Contributors</h2>
+            <span className="about-section-label">05</span>
+          </div>
+
+          <p className="about-section-description">
+            Kinshow is built by the community. A huge thank you to our{" "}
+            {CONTRIBUTORS.length} contributors who have shipped fixes, features,
+            and improvements.
+          </p>
+
+          <div className="about-contributor-list">
+            {CONTRIBUTORS.map((c) => (
+              <a
+                className="about-contributor"
+                key={c.login}
+                href={`https://github.com/${c.login}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  className="about-contributor-avatar"
+                  src={c.avatar}
+                  alt={`${c.login} avatar`}
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+
+                <div className="about-contributor-info">
+                  <span className="about-contributor-name">
+                    {c.login}
+                    {c.owner && (
+                      <span className="about-contributor-badge">Owner</span>
+                    )}
+                  </span>
+
+                  <span className="about-contributor-count">
+                    {c.contributions}{" "}
+                    {c.contributions === 1
+                      ? "contribution"
+                      : "contributions"}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+
         {/* CONTRIBUTING */}
         <section className="about-section">
           <div className="about-contribute">
@@ -317,7 +385,7 @@ export default function About() {
         <section className="about-section">
           <div className="about-section-heading">
             <h2 className="about-section-title">Frequently Asked Questions</h2>
-            <span className="about-section-label">05</span>
+            <span className="about-section-label">06</span>
           </div>
 
           <div className="about-faq">
