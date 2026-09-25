@@ -6,6 +6,7 @@ import {
   organizationSchema,
   breadcrumbSchema,
 } from "../components/SEO";
+import CONTRIBUTORS from "../data/contributors.json";
 
 const FAQ_DATA = [
   {
@@ -110,23 +111,6 @@ const TECHNOLOGIES = [
   "OMDb API",
   "Vercel",
   "Vercel Analytics",
-];
-
-const CONTRIBUTORS = [
-  { login: "kiinshuk", avatar: "https://avatars.githubusercontent.com/u/84260655?v=4", contributions: 103, owner: true },
-  { login: "AyushVerma04", avatar: "https://avatars.githubusercontent.com/u/148244088?v=4", contributions: 4 },
-  { login: "priyanshu-purohit", avatar: "https://avatars.githubusercontent.com/u/234338887?v=4", contributions: 4 },
-  { login: "Salarmemon", avatar: "https://avatars.githubusercontent.com/u/142799802?v=4", contributions: 3 },
-  { login: "ABHISHE9936e", avatar: "https://avatars.githubusercontent.com/u/241580558?v=4", contributions: 2 },
-  { login: "KhemkaAkshat", avatar: "https://avatars.githubusercontent.com/u/144114211?v=4", contributions: 2 },
-  { login: "sweranauman-sketch", avatar: "https://avatars.githubusercontent.com/u/272179517?v=4", contributions: 2 },
-  { login: "githarshil", avatar: "https://avatars.githubusercontent.com/u/170957406?v=4", contributions: 2 },
-  { login: "krsnaa04", avatar: "https://avatars.githubusercontent.com/u/194541187?v=4", contributions: 2 },
-  { login: "vianavitor-dev", avatar: "https://avatars.githubusercontent.com/u/176242424?v=4", contributions: 2 },
-  { login: "7-Tarun", avatar: "https://avatars.githubusercontent.com/u/214530696?v=4", contributions: 1 },
-  { login: "Paniv45", avatar: "https://avatars.githubusercontent.com/u/140896774?v=4", contributions: 1 },
-  { login: "Piyush-NST", avatar: "https://avatars.githubusercontent.com/u/153071113?v=4", contributions: 1 },
-  { login: "geminators", avatar: "https://avatars.githubusercontent.com/u/277517169?v=4", contributions: 1 },
 ];
 
 export default function About() {

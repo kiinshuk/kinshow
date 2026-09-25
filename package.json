@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/fetch-contributors.mjs",
     "build": "vite build && node prerender.mjs",
+    "contributors": "node scripts/fetch-contributors.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
