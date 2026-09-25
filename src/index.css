@@ -833,9 +833,6 @@ ul, ol { list-style: none; }
 .rail-wrap {
   position: relative;
 }
-.rail-wrap:hover .rail-arrow {
-  opacity: 1;
-}
 .rail-track {
   display: flex;
   gap: 12px;
@@ -896,6 +893,18 @@ ul, ol { list-style: none; }
   /* .rail-arrow { display: none; } */
   .rail-title {
     font-size: 16px;
+  }
+}
+
+@media (hover:hover) {
+  .rail-wrap:hover .rail-arrow {
+    opacity: 1;
+  }
+}
+
+@media (hover:none) {
+  .rail-arrow {
+    opacity: 1;
   }
 }
 
