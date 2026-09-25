@@ -1308,3 +1308,24 @@ ul, ol { list-style: none; }
   .blog-grid { grid-template-columns: 1fr; padding: 0 16px; }
   .blog-card--small { max-width: 100%; }
 }
+
+/* Page Transition Loader */
+.top-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  z-index: 9999;
+  pointer-events: none;
+  animation: top-progress-bar 300ms ease-out forwards;
+}
+
+@keyframes top-progress-bar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}

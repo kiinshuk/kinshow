@@ -20,6 +20,7 @@ import BlogPost from './pages/BlogPost';
 import ScrollButton from './components/ScrollButton';
 import { useEffect, useRef, useState } from 'react';
 import NotFound from './pages/NotFound';
+import PageLoader from './components/PageLoader';
 
 function RouteProgress() {
   const location = useLocation();
@@ -59,6 +60,7 @@ function AppInner() {
   const { list } = useWatchlist();
   return ( 
     <>
+      <PageLoader />
       <Navbar watchlistCount={list.length} />
       <ErrorBoundary>
       <Routes>
