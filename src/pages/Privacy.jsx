@@ -2,7 +2,7 @@ import { SEO } from '../components/SEO';
 
 export default function Privacy() {
   return (
-    <main className="page">
+    <main id="content" tabIndex={-1} className="page">
       <SEO title="Privacy Policy" description="Kinshow privacy policy. Learn how we collect, use, and protect your data." url="https://kinshow.vercel.app/privacy" />
       <div className="legal-page">
         <h1 className="legal-title">Privacy Policy</h1>

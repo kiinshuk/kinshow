@@ -73,7 +73,7 @@ export default function Movies() {
   }, [tab, sort]);
 
   return (
-    <main className="page">
+    <main id="content" tabIndex={-1} className="page">
       <SEO title="Movies" description="Browse 80+ curated movies with ratings, cast info, and streaming links. Find popular, top rated, and new releases. Free movie discovery on Kinshow." url="https://kinshow.vercel.app/movies" />
       <StructuredData data={breadcrumbSchema([
         { name: 'Home', url: 'https://kinshow.vercel.app/' },

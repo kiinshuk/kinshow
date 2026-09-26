@@ -6,7 +6,7 @@ export default function Blog() {
   const posts = getBlogPosts();
 
   return (
-    <main className="page">
+    <main id="content" tabIndex={-1} className="page">
       <SEO
         title="Blog"
         description="Read the latest articles about movies, TV shows, and streaming on Kinshow. Guides, recommendations, lists, and tips for finding what to watch."

@@ -56,7 +56,7 @@ export default function Explore() {
   const tvHeading = selectedGenre ? `${selectedGenre} TV Shows` : 'Popular Series';
 
   return (
-    <main className="page">
+    <main id="content" tabIndex={-1} className="page">
       <SEO title="Explore" description="Explore movies and TV shows by genre. Find Action, Comedy, Drama, Horror, Sci-Fi, Thriller, and more. Discover your next favorite title on Kinshow." url="https://kinshow.vercel.app/explore" />
       <StructuredData data={breadcrumbSchema([
         { name: 'Home', url: 'https://kinshow.vercel.app/' },

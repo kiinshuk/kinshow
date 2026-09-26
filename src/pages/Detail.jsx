@@ -155,8 +155,8 @@ export default function Detail() {
     });
   }, [data?.tvmazeId, data?.imdbID, seasonNum, type, id]);
 
-  if (loading) return <main className="page detail"><SkeletonDetail /></main>;
-  if (!data) return <main className="page detail"><div className="empty-state">
+  if (loading) return <main id="content" tabIndex={-1} className="page detail"><SkeletonDetail /></main>;
+  if (!data) return <main id="content" tabIndex={-1} className="page detail"><div className="empty-state">
    <EmptyState 
   title="No Results Found"
   description="We couldn't find the data you were looking for."
@@ -187,7 +187,7 @@ export default function Detail() {
   };
 
   return (
-    <main className="page detail">
+    <main id="content" tabIndex={-1} className="page detail">
       <SEO
         title={`${title} (${y(data)})`}
         description={data.overview?.slice(0, 160) || `${title} - ${isTv ? 'TV Series' : 'Movie'}`}

@@ -115,7 +115,7 @@ const TECHNOLOGIES = [
 
 export default function About() {
   return (
-    <main className="page">
+    <main id="content" tabIndex={-1} className="page">
       <SEO
         title="About"
         description="Learn about Kinshow — a free cinema discovery platform for movies and TV shows. Browse ratings, cast, reviews, and find streaming links. No sign-up required."

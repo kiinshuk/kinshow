@@ -166,6 +166,23 @@ ul, ol { list-style: none; }
   white-space: nowrap;
   border: 0;
 }
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 1100;
+  padding: 8px 12px;
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  transform: translateY(calc(-100% - 16px));
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+main#content {
+  scroll-margin-top: var(--nav-h);
+}
 
 /* ─── NAV ─────────────────────────────────── */
 .nav {
