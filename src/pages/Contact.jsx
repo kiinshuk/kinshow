@@ -9,7 +9,7 @@ const FAQ_DATA = [
 
 export default function Contact() {
   return (
-    <main className="page">
+    <main id="content" tabIndex={-1} className="page">
       <SEO
         title="Contact Us"
         description="Get in touch with the Kinshow team. Send feedback, report bugs, suggest features, or ask questions. We respond within 48 hours."

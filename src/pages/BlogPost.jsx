@@ -8,7 +8,7 @@ export default function BlogPost() {
  
   if (!post) {
     return (
-      <main className="page">
+      <main id="content" tabIndex={-1} className="page">
         <div className="empty-state">
         <EmptyState 
   title="No Results Found"
@@ -24,7 +24,7 @@ export default function BlogPost() {
   const relatedPosts = allPosts.filter(p => p.slug !== post.slug).slice(0, 3);
 
   return (
-    <main className="page">
+    <main id="content" tabIndex={-1} className="page">
       <SEO
         title={post.title}
         description={post.excerpt}

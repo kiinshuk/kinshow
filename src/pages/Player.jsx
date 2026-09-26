@@ -219,7 +219,7 @@ export default function Player() {
 
   const armPlayer = () => { if (!armed) setArmed(true); };
 
-  if (!loc) return <main className="page player-page"><div className="empty-state"><h3>No content selected</h3><p>Go back and select something to watch.</p></div></main>;
+  if (!loc) return <main id="content" tabIndex={-1} className="page player-page"><div className="empty-state"><h3>No content selected</h3><p>Go back and select something to watch.</p></div></main>;
 
   const { type = 'movie', id, title, imdbId, season = 1, episode = 1 } = loc;
   const effectiveId = (imdbId && imdbId.startsWith('tt')) ? imdbId : (id || imdbId || loc.tvmazeId);
@@ -250,7 +250,7 @@ export default function Player() {
   const detailPath = isTV ? `/detail/tv/${loc.tvmazeId || id}` : `/detail/movie/${id}`;
 
   return (
-    <main className="page player-page">
+    <main id="content" tabIndex={-1} className="page player-page">
       <SEO
         title={`Watch ${title}${isTV ? ` ${fmtEp(sn, ep)}` : ''}`}
         description={`Watch ${title} ${isTV ? `Season ${sn} Episode ${ep}` : 'full movie'} online for free. Stream now on Kinshow.`}

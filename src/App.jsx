@@ -59,6 +59,7 @@ function AppInner() {
   const { list } = useWatchlist();
   return ( 
     <>
+      <a className="skip-link" href="#content">Skip to main content</a>
       <Navbar watchlistCount={list.length} />
       <ErrorBoundary>
       <Routes>

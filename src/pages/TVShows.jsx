@@ -29,7 +29,7 @@ export default function TVShows() {
   }, [tab]);
 
   return (
-    <main className="page">
+    <main id="content" tabIndex={-1} className="page">
       <SEO title="TV Shows" description="Browse trending TV shows with episode guides, cast info, and streaming links. Find popular, top rated, and currently airing series on Kinshow." url="https://kinshow.vercel.app/tv" />
       <StructuredData data={breadcrumbSchema([
         { name: 'Home', url: 'https://kinshow.vercel.app/' },

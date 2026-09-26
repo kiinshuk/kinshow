@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function NotFound() {
   return (
-    <div className="not-found">
+    <main id="content" tabIndex={-1} className="not-found">
       <div className="not-found-content">
         <div className="error-code">404</div>
 
@@ -17,7 +17,7 @@ function NotFound() {
           ← Back to Home
         </Link>
       </div>
-    </div>
+    </main>
   );
 }
 

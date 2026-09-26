@@ -14,7 +14,7 @@ export default function Profile() {
   const runtimeMinutes = totalRuntime % 60;
 
   return (
-    <main className="page">
+    <main id="content" tabIndex={-1} className="page">
       <SEO title="Profile" description="Your Kinshow profile. Track your watchlist and viewing history." url="https://kinshow.vercel.app/profile" />
       <div className="profile-header">
         <div className="profile-avatar"><span>L</span></div>
