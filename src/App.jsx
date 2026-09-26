@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { ToastProvider } from './components/Toast';
 import { useWatchlist } from './store';
 import Navbar from './components/Navbar';
@@ -7,19 +8,20 @@ import ErrorBoundary from './components/ErrorBoundary';
 import Home from './pages/Home';
 import Movies from './pages/Movies';
 import TVShows from './pages/TVShows';
-import Detail from './pages/Detail';
-import Player from './pages/Player';
 import Watchlist from './pages/Watchlist';
 import Profile from './pages/Profile';
-import Explore from './pages/Explore';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
-import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import ScrollButton from './components/ScrollButton';
-import { useEffect, useRef, useState } from 'react';
+import { SkeletonCards } from './components/Skeletons';
 import NotFound from './pages/NotFound';
+
+const Detail = lazy(() => import('./pages/Detail'));
+const Player = lazy(() => import('./pages/Player'));
+const Explore = lazy(() => import('./pages/Explore'));
+const Blog = lazy(() => import('./pages/Blog'));
 
 function RouteProgress() {
   const location = useLocation();
@@ -52,32 +54,44 @@ function ScrollToTop() {
       behavior: 'instant',
     });
   }, [pathname]);
+
   return null;
-};
+}
 
 function AppInner() {
   const { list } = useWatchlist();
-  return ( 
+
+  return (
     <>
       <Navbar watchlistCount={list.length} />
+
       <ErrorBoundary>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/tv" element={<TVShows />} />
-        <Route path="/detail/:type/:id" element={<Detail />} />
-        <Route path="/player" element={<Player />} />
-        <Route path="/watchlist" element={<Watchlist />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="*" element={<NotFound /> }/>
-      </Routes>
+        <Suspense
+          fallback={
+            <div className="content-rail">
+              <SkeletonCards count={6} />
+            </div>
+          }
+        >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/tv" element={<TVShows />} />
+            <Route path="/detail/:type/:id" element={<Detail />} />
+            <Route path="/player" element={<Player />} />
+            <Route path="/watchlist" element={<Watchlist />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </ErrorBoundary>
+
       <footer className="footer">
         <div className="footer-inner">
           <div className="footer-grid">
@@ -85,6 +99,7 @@ function AppInner() {
               <div className="footer-brand"><span className="nav-logo-mark">KS</span> Kinshow</div>
               <p className="footer-desc">Your premium cinema discovery platform. Explore movies and TV shows, track your watchlist, and find where to stream.</p>
             </div>
+
             <div className="footer-col">
               <h4 className="footer-heading">Browse</h4>
               <ul className="footer-links">
@@ -94,6 +109,7 @@ function AppInner() {
                 <li><Link to="/watchlist">My List</Link></li>
               </ul>
             </div>
+
             <div className="footer-col">
               <h4 className="footer-heading">Company</h4>
               <ul className="footer-links">
@@ -103,6 +119,7 @@ function AppInner() {
                 <li><Link to="/privacy">Privacy Policy</Link></li>
               </ul>
             </div>
+
             <div className="footer-col">
               <h4 className="footer-heading">Powered By</h4>
               <ul className="footer-links footer-links--muted">
@@ -112,11 +129,13 @@ function AppInner() {
               </ul>
             </div>
           </div>
+
           <div className="footer-bottom">
             <p className="footer-copy">© 2026 Kinshow. For educational purposes only. All product names, logos, and brands are property of their respective owners.</p>
           </div>
         </div>
       </footer>
+
       <CookieConsent />
       <ScrollButton />
     </>
