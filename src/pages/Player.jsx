@@ -187,6 +187,36 @@ export default function Player() {
     return () => { window.open = originalOpen; document.removeEventListener('click', blockExternal, true); };
   }, []);
 
+  useEffect(() => {
+    if (!('wakeLock' in navigator)) return;
+    let lock = null;
+    let cancelled = false;
+
+    const request = async () => {
+      if (cancelled || document.visibilityState !== 'visible') return;
+      try {
+        lock = await navigator.wakeLock.request('screen');
+      } catch { /* unsupported context (http, backgrounded, etc.) */ }
+    };
+
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        request();
+      } else if (lock) {
+        lock.release().catch(() => {});
+        lock = null;
+      }
+    };
+
+    request();
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => {
+      cancelled = true;
+      document.removeEventListener('visibilitychange', onVisibility);
+      if (lock) lock.release().catch(() => {});
+    };
+  }, []);
+
   const armPlayer = () => { if (!armed) setArmed(true); };
 
   if (!loc) return <main className="page player-page"><div className="empty-state"><h3>No content selected</h3><p>Go back and select something to watch.</p></div></main>;
