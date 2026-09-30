@@ -14,6 +14,7 @@ import EmptyState from '../components/EmptyState';
 export default function Detail() {
   const { type, id } = useParams();
   const navigate = useNavigate();
+  const isValidType = type === 'movie' || type === 'tv';
   const [data, setData] = useState(null);
   const [seasons, setSeasons] = useState([]);
   const [episodes, setEpisodes] = useState([]);
@@ -78,6 +79,14 @@ export default function Detail() {
   }, [data?.cast]);
 
   useEffect(() => {
+    if (!isValidType) {
+      setLoading(false);
+      setData(null);
+      setSeasons([]);
+      setEpisodes([]);
+      return;
+    }
+
     setLoading(true); setData(null); setSeasons([]); setEpisodes([]);
     window.scrollTo(0, 0);
 
@@ -95,7 +104,7 @@ export default function Detail() {
         }
         setLoading(false);
       });
-    } else {
+    } else if (type === 'movie') {
       const movie = MOVIES.find(m => m.id === id || String(m.id) === String(id));
       if (movie) {
         setData({ ...movie, media_type: 'movie', cast: [], crew: [] });
@@ -113,10 +122,10 @@ export default function Detail() {
         setLoading(false);
       }
     }
-  }, [type, id]);
+  }, [type, id, isValidType]);
 
   useEffect(() => {
-    if (!data) return;
+    if (!data || !isValidType) return;
     if (type === 'movie') {
       const currentGenres = (data.genres || []).map(g => g.name.toLowerCase());
       const recs = MOVIES
@@ -126,7 +135,7 @@ export default function Detail() {
         .sort((a, b) => b.overlap - a.overlap)
         .slice(0, 12);
       setRecommended(recs);
-    } else {
+    } else if (type === 'tv') {
       const tvmazeId = data.tvmazeId || Number(id);
       const currentGenres = (data.genres || []).map(g => g.name.toLowerCase());
       Promise.all([tvmazeShowsByPage(1), tvmazeShowsByPage(2), tvmazeShowsByPage(3)]).then(pages => {
@@ -140,7 +149,7 @@ export default function Detail() {
         setRecommended(recs);
       });
     }
-  }, [data, type, id]);
+  }, [data, type, id, isValidType]);
 
   useEffect(() => {
     if (!data || type !== 'tv' || seasonNum < 1) return;
@@ -155,8 +164,8 @@ export default function Detail() {
     });
   }, [data?.tvmazeId, data?.imdbID, seasonNum, type, id]);
 
-  if (loading) return <main id="content" tabIndex={-1} className="page detail"><SkeletonDetail /></main>;
-  if (!data) return <main id="content" tabIndex={-1} className="page detail"><div className="empty-state">
+  if (loading && isValidType) return <main id="content" tabIndex={-1} className="page detail"><SkeletonDetail /></main>;
+  if (!isValidType || !data) return <main id="content" tabIndex={-1} className="page detail"><div className="empty-state">
    <EmptyState 
   title="No Results Found"
   description="We couldn't find the data you were looking for."
