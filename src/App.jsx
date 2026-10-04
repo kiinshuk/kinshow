@@ -131,7 +131,7 @@ function AppInner() {
           </div>
 
           <div className="footer-bottom">
-            <p className="footer-copy">© 2026 Kinshow. For educational purposes only. All product names, logos, and brands are property of their respective owners.</p>
+            <p className="footer-copy">© {new Date().getFullYear()} Kinshow. For educational purposes only. All product names, logos, and brands are property of their respective owners.</p>
           </div>
         </div>
       </footer>
