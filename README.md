@@ -18,7 +18,7 @@ npm install
 npm run dev        # → http://localhost:5173
 ```
 
-Then pick an issue tagged [`good first issue`](https://github.com/kiinshuk/kinshow/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22), fork, branch, and open a PR. Full guidelines: [CONTRIBUTING.md](CONTRIBUTING.md).
+Then pick an issue tagged [`good first issue`](https://github.com/kiinshuk/kinshow/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22), fork, branch, and open a PR. Full guidelines: [CONTRIBUTING.md](CONTRIBUTING.md) (see the [label glossary](CONTRIBUTING.md#label-glossary) if you're not sure what a label means).
 
 > **Before your first PR:** run `npm run build` — it must pass. If the build dirties `src/data/contributors.json`, restore it with `git checkout -- src/data/contributors.json` before committing.
 
