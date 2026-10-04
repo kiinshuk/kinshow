@@ -90,6 +90,31 @@ src/
 - Follow existing code style
 - Test your changes locally (`npm run dev` + `npm run preview`)
 
+### Label Glossary
+
+Issue labels tell you what kind of task something is and how urgently it's
+being tracked. This list matches the live label set on the repo:
+
+| Label | Meaning | When it's used |
+|---|---|---|
+| `good first issue` | Good for newcomers | Self-contained, low-context tasks for first-time contributors |
+| `help wanted` | Extra attention is needed | The maintainer wants community help on this one specifically |
+| `bug` | Something isn't working | Confirmed defect in existing behavior |
+| `enhancement` | New feature or request | New functionality or a change to existing behavior |
+| `documentation` | Improvements or additions to documentation | README, CONTRIBUTING, code comments, or in-app copy |
+| `accessibility` | Barrier affecting people with disabilities | Keyboard nav, screen reader, contrast, and similar a11y fixes |
+| `performance` | Performance improvements | Load time, bundle size, runtime speed |
+| `seo` | Search engine optimization | Meta tags, prerendering, sitemap, and similar |
+| `pwa` | Progressive Web App features | Service worker, manifest, offline support, installability |
+| `high-priority` | Important and urgent | Jump the queue — maintainer wants this addressed soon |
+| `question` | Further information is requested | The report needs clarification before it's actionable |
+| `invalid` | This doesn't seem right | Not a real bug, or not reproducible as described |
+| `duplicate` | This issue or pull request already exists | Already covered by another open issue/PR |
+| `wontfix` | This will not be worked on | Acknowledged but intentionally out of scope |
+
+If you're picking your first issue, start with `good first issue`; add a
+comment on the issue so it doesn't get picked up twice.
+
 ## Code Style
 
 - Use functional components with hooks

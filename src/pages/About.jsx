@@ -318,7 +318,17 @@ export default function About() {
               <p className="about-contribute-description">
                 Kinshow is an open-source project. Found a bug, have an idea, or
                 want to help improve the project? Check out the repository and
-                contribute to its development.
+                contribute to its development. Not sure what a label like{" "}
+                <code>good first issue</code> or <code>help wanted</code> means?
+                See the{" "}
+                <a
+                  href="https://github.com/kiinshuk/kinshow/blob/main/CONTRIBUTING.md#label-glossary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  label glossary
+                </a>{" "}
+                in CONTRIBUTING.md.
               </p>
             </div>
 
