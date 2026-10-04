@@ -1071,6 +1071,12 @@ main#content {
   }
 }
 
+.rail-wrap .rail-arrow[aria-disabled="true"] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, 0.5);
+}
+
 /* ─── MEDIA CARD ──────────────────────────── */
 .card {
   flex: 0 0 calc((100% - 60px) / 7);
