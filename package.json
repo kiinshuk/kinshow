@@ -8,7 +8,8 @@
     "prebuild": "node scripts/fetch-contributors.mjs",
     "build": "vite build && node prerender.mjs",
     "contributors": "node scripts/fetch-contributors.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -18,7 +19,11 @@
     "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^14.3.1",
     "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^5.4.11"
+    "jsdom": "^30.1.2",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.9"
   }
 }

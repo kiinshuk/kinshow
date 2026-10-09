@@ -1063,12 +1063,26 @@ main#content {
   .rail-wrap:hover .rail-arrow {
     opacity: 1;
   }
+  .rail-wrap:hover .rail-arrow[aria-disabled="true"] {
+    opacity: 0.35;
+  }
 }
 
 @media (hover:none) {
   .rail-arrow {
     opacity: 1;
   }
+  .rail-arrow[aria-disabled="true"] {
+    opacity: 0.35;
+  }
+}
+
+.rail-arrow[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.rail-arrow[aria-disabled="true"]:hover {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 /* ─── MEDIA CARD ──────────────────────────── */
