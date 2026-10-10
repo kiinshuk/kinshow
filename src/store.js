@@ -2,17 +2,35 @@ import { useState, useCallback, useEffect } from 'react';
 
 const SEARCH_HISTORY_KEY = 'lg_searchHistory';
 const SEARCH_HISTORY_TTL = 7 * 24 * 60 * 60 * 1000;
+const STORAGE_VERSION = '1';
+const STORAGE_KEYS = ['lg_watchlist', 'lg_history', 'lg_ratings', SEARCH_HISTORY_KEY];
+
+// Missing or unknown versions reset only store-owned data. Mark the version after
+// every removal succeeds; blocked storage falls back to in-memory defaults.
+function ensureStorageVersion() {
+  try {
+    if (localStorage.getItem('lg_version') !== STORAGE_VERSION) {
+      STORAGE_KEYS.forEach(key => localStorage.removeItem(key));
+      localStorage.setItem('lg_version', STORAGE_VERSION);
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 
 function useLocalStorage(key, initial) {
   const [val, setVal] = useState(() => {
-    try { const d = localStorage.getItem('lg_' + key); return d ? JSON.parse(d) : initial; } catch { return initial; }
+    try { if (!ensureStorageVersion()) return initial; const d = localStorage.getItem('lg_' + key); return d ? JSON.parse(d) : initial; } catch { return initial; }
   });
-  useEffect(() => { try { localStorage.setItem('lg_' + key, JSON.stringify(val)); } catch {} }, [key, val]);
+  useEffect(() => { try { if (!ensureStorageVersion()) return; localStorage.setItem('lg_' + key, JSON.stringify(val)); } catch {} }, [key, val]);
   return [val, setVal];
 }
 
 export function getSearchHistory() {
   try {
+    if (!ensureStorageVersion()) return [];
     const stored = JSON.parse(localStorage.getItem(SEARCH_HISTORY_KEY) || '[]');
     const cutoff = Date.now() - SEARCH_HISTORY_TTL;
     const recent = Array.isArray(stored)
@@ -30,6 +48,7 @@ export function getSearchHistory() {
 }
 
 export function saveSearchTerm(value) {
+  if (!ensureStorageVersion()) return [];
   const normalized = value.trim();
   if (!normalized) return getSearchHistory();
 
@@ -46,6 +65,7 @@ export function saveSearchTerm(value) {
 
 export function removeSearchTerm(timestamp) {
   try {
+    if (!ensureStorageVersion()) return [];
     const next = getSearchHistory().filter(item => item.timestamp !== timestamp);
     localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(next));
     return next;
