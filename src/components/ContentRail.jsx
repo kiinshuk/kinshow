@@ -30,13 +30,23 @@ export default function ContentRail({ title, items = [], viewAll, loading }) {
         {viewAll && <Link to={viewAll} className="rail-viewall">View All <span>→</span></Link>}
       </div>
       <div className="rail-wrap">
-        {canScrollL && <button className="rail-arrow rail-arrow--left" onClick={() => scroll(-1)} aria-label="Scroll left">‹</button>}
+        <button
+          className="rail-arrow rail-arrow--left"
+          onClick={() => canScrollL && scroll(-1)}
+          aria-label="Scroll left"
+          aria-disabled={!canScrollL}
+        >‹</button>
         <div className="rail-track" ref={ref}>
           {loading ? Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="card card--skeleton"><div className="card-poster skeleton-pulse" /><div className="card-meta"><div className="skeleton-line skeleton-line--title" /><div className="skeleton-line skeleton-line--year" /></div></div>
           )) : items.map((item, i) => <MediaCard key={`${item.id}-${i}`} item={item} />)}
         </div>
-        {canScrollR && <button className="rail-arrow rail-arrow--right" onClick={() => scroll(1)} aria-label="Scroll right">›</button>}
+        <button
+          className="rail-arrow rail-arrow--right"
+          onClick={() => canScrollR && scroll(1)}
+          aria-label="Scroll right"
+          aria-disabled={!canScrollR}
+        >›</button>
       </div>
     </section>
   );
