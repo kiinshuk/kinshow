@@ -220,7 +220,7 @@ export default function Detail() {
       <SEO
         title={`${title} (${y(data)})`}
         description={data.overview?.slice(0, 160) || `${title} - ${isTv ? 'TV Series' : 'Movie'}`}
-        image={posterUrl}
+        image={posterUrl || data.backdrop_path || null}
         url={`https://kinshow.vercel.app/detail/${type}/${id}`}
         type={isTv ? 'video.tv_show' : 'video.movie'}
       />
