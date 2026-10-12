@@ -3292,6 +3292,77 @@ main#content {
   color: var(--text-muted);
 }
 
+/* GFI CARD (near contributors grid) */
+
+.about-gfi-card {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  transition:
+    border-color var(--duration) var(--ease),
+    background var(--duration) var(--ease);
+}
+
+.about-gfi-card:hover {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+}
+
+.about-gfi-card-body {
+  min-width: 0;
+}
+
+.about-gfi-card-title {
+  margin: 0 0 5px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.about-gfi-card-description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.about-gfi-card-description code {
+  padding: 1px 6px;
+  background: var(--surface-active);
+  border-radius: 0;
+  font-size: 12px;
+  font-family: var(--font-mono, monospace);
+  color: var(--text);
+}
+
+.about-gfi-card-link {
+  flex-shrink: 0;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color var(--duration) var(--ease);
+}
+
+.about-gfi-card-link:hover {
+  color: var(--accent-hover);
+}
+
+@media (max-width: 640px) {
+  .about-gfi-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
 /* CONTRIBUTING */
 
 .about-contribute {

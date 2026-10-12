@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   SEO,
@@ -113,7 +114,39 @@ const TECHNOLOGIES = [
   "Vercel Analytics",
 ];
 
+const GFI_FILTER_URL =
+  "https://github.com/kiinshuk/kinshow/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22";
+const GFI_SEARCH_URL =
+  "https://api.github.com/search/issues?q=repo:kiinshuk/kinshow+is:open+is:issue+label:%22good+first+issue%22&per_page=1";
+
 export default function About() {
+  const [gfiCount, setGfiCount] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadGfiCount = async () => {
+      try {
+        const res = await fetch(GFI_SEARCH_URL, {
+          headers: { Accept: "application/vnd.github+json" },
+        });
+        // 403/429 means rate-limited (or secondary limits): fall back to a
+        // count-free card rather than a stale or wrong number.
+        if (res.status === 403 || res.status === 429 || !res.ok) throw 0;
+        const data = await res.json();
+        if (!cancelled && typeof data.total_count === "number") {
+          setGfiCount(data.total_count);
+        }
+      } catch {
+        // Any failure (network, rate-limit, shape mismatch) keeps the count
+        // hidden; the card still works because it always renders the link.
+        if (!cancelled) setGfiCount(null);
+      }
+    };
+    loadGfiCount();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   return (
     <main id="content" tabIndex={-1} className="page">
       <SEO
@@ -306,6 +339,36 @@ export default function About() {
                 </div>
               </a>
             ))}
+          </div>
+
+          <div className="about-gfi-card">
+            <div className="about-gfi-card-body">
+              <h3 className="about-gfi-card-title">Start contributing</h3>
+
+              <p className="about-gfi-card-description">
+                {typeof gfiCount === "number" && gfiCount > 0 ? (
+                  <>
+                    {gfiCount} open <code>good first issue</code>{" "}
+                    {gfiCount === 1 ? "task is" : "tasks are"} ready for a
+                    first-time contributor.
+                  </>
+                ) : (
+                  <>
+                    <code>good first issue</code> labels mark self-contained
+                    tasks that are approachable for newcomers.
+                  </>
+                )}
+              </p>
+            </div>
+
+            <a
+              className="about-gfi-card-link"
+              href={GFI_FILTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Browse issues →
+            </a>
           </div>
         </section>
 
