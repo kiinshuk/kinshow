@@ -1,3 +1,4 @@
+import Button from './Button';
 import { useState, useEffect } from 'react';
 import { hasConsent, setConsent } from '../utils/cookies';
 
@@ -24,8 +25,8 @@ export default function CookieConsent() {
           <p>We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept", you consent to our use of cookies. <a href="/privacy"><b><u>Learn More</u></b></a></p>
         </div>
         <div className="cookie-actions">
-          <button className="cookie-btn cookie-btn--accept" onClick={handleAccept}>Accept</button>
-          <button className="cookie-btn cookie-btn--decline" onClick={handleDecline}>Decline</button>
+          <Button variant="primary" onClick={handleAccept}>Accept</Button>
+          <Button variant="secondary" onClick={handleDecline}>Decline</Button>
         </div>
       </div>
     </div>

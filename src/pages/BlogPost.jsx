@@ -1,3 +1,4 @@
+import Button from '../components/Button';
 import { useParams, Link } from 'react-router-dom';
 import { SEO, StructuredData, breadcrumbSchema } from '../components/SEO';
 import { getBlogPost, getBlogPosts } from '../blogData';
@@ -13,7 +14,7 @@ export default function BlogPost() {
         <EmptyState 
   title="No Results Found"
   description="We couldn't find the data you were looking for."
-  action={<Link to="/blog" className="btn btn--secondary">Back to Blog</Link>}
+  action={<Button as={Link} to="/blog" variant="secondary">Back to Blog</Button>}
 />
         </div>
       </main>

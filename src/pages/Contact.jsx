@@ -1,3 +1,4 @@
+import Button from '../components/Button';
 import { SEO, StructuredData, faqSchema, breadcrumbSchema } from '../components/SEO';
 
 const FAQ_DATA = [
@@ -45,7 +46,7 @@ export default function Contact() {
           <h2>Social Media</h2>
           <p>Follow us for updates:</p>
           <div className="contact-socials">
-            <a href="https://github.com/kiinshuk" target="_blank" rel="noopener noreferrer" className="btn btn--secondary">GitHub</a>
+            <Button as="a" href="https://github.com/kiinshuk" target="_blank" rel="noopener noreferrer" variant="secondary">GitHub</Button>
           </div>
         </section>
 

@@ -1,3 +1,4 @@
+import Button from '../components/Button';
 import { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { tvmazeShow, tvmazeSeasons, tvmazeEpisodes, omdbEpisodes, omdbMovieById, tvmazeShowsByPage, MOVIES, title as t, year as y, rating as r, runtime } from '../api';
@@ -168,7 +169,7 @@ export default function Detail() {
    <EmptyState 
   title="No Results Found"
   description="We couldn't find the data you were looking for."
-  action={<Link to="/" className="btn btn--secondary">Go Home</Link>}
+  action={<Button as={Link} to="/" variant="secondary">Go Home</Button>}
 /></div></main>;
 
   const title = t(data);
@@ -236,17 +237,17 @@ export default function Detail() {
         <div className="detail-left">
           <PosterImg src={posterUrl} title={title} year={y(data)} rating={r(data)} idx={title.charCodeAt(0)} className="detail-poster" alt={title} />
           <div className="detail-actions-mobile">
-            <button className="btn btn--primary btn--block" onClick={playContent}>▶ Watch Now</button>
-            <button className="btn btn--secondary btn--block" onClick={toggleWatchlist}>{has(itemId) ? '✓ In My List' : '+ Add to List'}</button>
+            <Button variant="primary" className="btn--block" onClick={playContent}>▶ Watch Now</Button>
+            <Button variant="secondary" className="btn--block" onClick={toggleWatchlist}>{has(itemId) ? '✓ In My List' : '+ Add to List'}</Button>
             {movieTitle && (
-              <a
+              <Button as="a"
                 href={trailerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn--ghost btn--block"
+                variant="ghost" className="btn--block"
               >
                 Watch trailer
-              </a>
+              </Button>
             )}
           </div>
         </div>
@@ -264,22 +265,22 @@ export default function Detail() {
           {data.genres?.length > 0 && <p className="detail-genres">{data.genres.map(g => g.name).join(', ')}</p>}
           {data.overview && <p className="detail-overview">{data.overview}</p>}
           <div className="detail-actions">
-            <button className="btn btn--primary" onClick={playContent}>
+            <Button variant="primary" onClick={playContent}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               Watch Now
-            </button>
-            <button className="btn btn--ghost" onClick={toggleWatchlist}>
+            </Button>
+            <Button variant="ghost" onClick={toggleWatchlist}>
               {has(itemId) ? '✓ In My List' : '+ Add to List'}
-            </button>
+            </Button>
             {movieTitle && (
-              <a
+              <Button as="a"
                 href={trailerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn--ghost"
+                variant="ghost"
               >
                 Watch trailer
-              </a>
+              </Button>
             )}
           </div>
           <div className="detail-meta">

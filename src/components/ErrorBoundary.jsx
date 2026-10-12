@@ -1,3 +1,4 @@
+import Button from './Button';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -38,20 +39,20 @@ export default class ErrorBoundary extends Component {
               An unexpected error occurred. Please try again.
             </p>
             <div className="error-card__actions">
-              <button
+              <Button
                 type="button"
-                className="btn btn--primary"
+                variant="primary"
                 onClick={() => window.location.reload()}
               >
                 Reload
-              </button>
-              <Link
+              </Button>
+              <Button as={Link}
                 to="/"
-                className="btn btn--ghost"
+                variant="ghost"
                 onClick={this.handleReset}
               >
                 Go Home
-              </Link>
+              </Button>
             </div>
           </div>
         </main>

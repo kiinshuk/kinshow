@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import Button from '../components/Button';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useWatchlist } from '../store';
 import { useToast } from '../components/Toast';
@@ -10,16 +11,27 @@ export default function Watchlist() {
   const toast = useToast();
   const [filter, setFilter] = useState('all');
   const [sort, setSort] = useState('recent');
-  const [removingId, setRemovingId] = useState(null);
+  const [removingIds, setRemovingIds] = useState(() => new Set());
+  const removalTimers = useRef(new Map());
+
+  useEffect(() => {
+    const timers = removalTimers.current;
+    return () => {
+      timers.forEach(clearTimeout);
+      timers.clear();
+    };
+  }, []);
 
   const filtered = list
     .filter(i => filter === 'all' || i.type === filter)
     .sort((a, b) => sort === 'title' ? (a.title || '').localeCompare(b.title || '') : (b.added || 0) - (a.added || 0));
 
   const removeItem = (item) => {
+    if (removalTimers.current.has(item.id)) return;
     const originalIndex = list.findIndex(i => i.id === item.id);
-    setRemovingId(item.id);
-    setTimeout(() => {
+    setRemovingIds(ids => new Set([...ids, item.id]));
+    const timer = setTimeout(() => {
+      removalTimers.current.delete(item.id);
       remove(item.id); 
       toast(`${item.title} removed from My List`, {
         duration: 5000,
@@ -28,8 +40,13 @@ export default function Watchlist() {
           onClick: () => restore(item, originalIndex)
         }
       });
-      setRemovingId(null);
+      setRemovingIds(ids => {
+        const next = new Set(ids);
+        next.delete(item.id);
+        return next;
+      });
     }, 300);
+    removalTimers.current.set(item.id, timer);
   };
 
   if (list.length === 0) {
@@ -40,7 +57,7 @@ export default function Watchlist() {
           <div className="empty-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
           <h3>Your watchlist is waiting</h3>
           <p>Save movies and shows here so you never lose something you want to watch.</p>
-          <Link to="/" className="btn btn--primary">Discover Something</Link>
+          <Button as={Link} to="/" variant="primary">Discover Something</Button>
         </div>
       </main>
     );
@@ -65,19 +82,21 @@ export default function Watchlist() {
       <div className="watchlist-grid">
         {filtered.map(item => {
           const type = item.type || item.media_type || 'movie';
-          const isRemoving = removingId === item.id;
+          const isRemoving = removingIds.has(item.id);
           return (
 
-            <Link key={item.id} to={`/detail/${type}/${item.id}`} className={`watchlist-item ${isRemoving ? 'watchlist-item--removing' : ''}`} >
-              <div className="watchlist-poster">
-                <PosterImg src={item.poster_path} title={item.title} idx={item.title?.charCodeAt(0)} className="watchlist-poster-img" alt={item.title} />
-              </div>
-              <div className="watchlist-info">
-                <span className="watchlist-title">{item.title}</span>
-                <span className="watchlist-meta">{type === 'movie' ? 'Film' : 'Series'}</span>
-              </div>
-              <button className="watchlist-remove" onClick={e => { e.preventDefault(); removeItem(item); }} aria-label={`Remove ${item.title}`}>✕</button>
-            </Link>
+            <div key={item.id} className={`watchlist-item ${isRemoving ? 'watchlist-item--removing' : ''}`}>
+              <Link to={`/detail/${type}/${item.id}`} className="watchlist-link">
+                <div className="watchlist-poster">
+                  <PosterImg src={item.poster_path} title={item.title} idx={item.title?.charCodeAt(0)} className="watchlist-poster-img" alt={item.title} />
+                </div>
+                <div className="watchlist-info">
+                  <span className="watchlist-title">{item.title}</span>
+                  <span className="watchlist-meta">{type === 'movie' ? 'Film' : 'Series'}</span>
+                </div>
+              </Link>
+              <Button type="button" disabled={isRemoving} variant="danger" className="btn--icon btn--sm watchlist-remove" onClick={() => removeItem(item)} aria-label={`Remove ${item.title}`}>✕</Button>
+            </div>
           );
         })}
       </div>

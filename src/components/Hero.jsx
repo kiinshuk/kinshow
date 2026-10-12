@@ -1,3 +1,4 @@
+import Button from './Button';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { tvmazeMultipleShows, MOVIES, title as t, year as y, rating as r } from '../api';
@@ -96,16 +97,16 @@ export default function Hero() {
         </button>
         <div className="hero-cta" key={`cta-${idx}`}>
           <div className="hero-actions">
-            <button className="btn btn--primary" onClick={goTo}>
+            <Button variant="primary" onClick={goTo}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               Watch Now
-            </button>
-            <button className="btn btn--ghost" onClick={goTo}>
+            </Button>
+            <Button variant="ghost" onClick={goTo}>
               More Info
-            </button>
-            <button className="btn btn--ghost" onClick={toggleList}>
+            </Button>
+            <Button variant="ghost" onClick={toggleList}>
               {saved ? '✓ In My List' : '+ My List'}
-            </button>
+            </Button>
           </div>
           {items.length > 1 && (
             <div className="hero-progress">

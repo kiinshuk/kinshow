@@ -1,3 +1,4 @@
+import Button from '../components/Button';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate, useLocation, useSearchParams, Link } from 'react-router-dom';
 import { tvmazeEpisodes, tvmazeLookupByImdb, tvmazeSeasons } from '../api';
@@ -272,27 +273,27 @@ export default function Player() {
       {resuming && (
         <div className="player-resume">
           <span className="player-resume-text">Continue watching <strong>{title}{isTV ? ` — ${fmtEp(sn, ep)}` : ''}</strong></span>
-          <Link className="btn btn--ghost" to={detailPath}>Details</Link>
-          <button className="btn btn--ghost" onClick={() => setResuming(false)}>Dismiss</button>
+          <Button as={Link} variant="ghost" className="btn--sm" to={detailPath}>Details</Button>
+          <Button variant="ghost" className="btn--sm" onClick={() => setResuming(false)}>Dismiss</Button>
         </div>
       )}
 
       <div className="player-header">
-        <button className="btn btn--ghost" onClick={() => navigate(-1)}>← Back</button>
+        <Button variant="ghost" className="btn--sm" onClick={() => navigate(-1)}>← Back</Button>
         <h2 className="player-title">{title}{isTV ? ` — ${fmtEp(sn, ep)}` : ''}</h2>
         <div className="player-header-actions">
-          <button className={`btn btn--ghost ${copied ? 'btn-copied' : ''}`} onClick={copyShare}>
+          <Button variant="ghost" className={`btn--sm ${copied ? 'btn-copied' : ''}`} onClick={copyShare}>
             {copied ? '✓ Copied!' : 'Share'}
-          </button>
-          <button className="btn btn--ghost" onClick={() => setHelpOpen(true)} aria-label="Keyboard shortcuts">? Shortcuts</button>
+          </Button>
+          <Button variant="ghost" className="btn--sm" onClick={() => setHelpOpen(true)} aria-label="Keyboard shortcuts">? Shortcuts</Button>
         </div>
       </div>
 
       <div className="player-servers">
         {SERVERS.map((sv, i) => (
-          <button key={sv.id} className={`player-server-btn ${i === server ? 'player-server-btn--active' : ''}`} onClick={() => switchServer(i)}>
+          <Button key={sv.id} variant={i === server ? 'primary' : 'secondary'} className="btn--sm" aria-pressed={i === server} onClick={() => switchServer(i)}>
             {sv.name}
-          </button>
+          </Button>
         ))}
       </div>
 
@@ -313,12 +314,12 @@ export default function Player() {
               ))}
             </select>
           )}
-          <button className="btn btn--ghost" disabled={sn <= 1 && ep <= 1} onClick={() => goEp(ep > 1 ? ep - 1 : 1, ep > 1 ? sn : Math.max(1, sn - 1))}>← Prev</button>
+          <Button variant="ghost" className="btn--sm" disabled={sn <= 1 && ep <= 1} onClick={() => goEp(ep > 1 ? ep - 1 : 1, ep > 1 ? sn : Math.max(1, sn - 1))}>← Prev</Button>
           <span className="player-ep-label">{fmtEp(sn, ep)}</span>
-          <button className="btn btn--ghost" onClick={() => goEp(ep + 1, sn)}>Next →</button>
-          <button className={`btn btn--ghost player-ep-toggle ${pickerOpen ? 'player-ep-toggle--active' : ''}`} onClick={() => setPickerOpen(v => !v)}>
+          <Button variant="ghost" className="btn--sm" onClick={() => goEp(ep + 1, sn)}>Next →</Button>
+          <Button variant={pickerOpen ? 'secondary' : 'ghost'} className="btn--sm player-ep-toggle" aria-expanded={pickerOpen} onClick={() => setPickerOpen(v => !v)}>
             {pickerOpen ? 'Hide Episodes' : 'Episodes'}
-          </button>
+          </Button>
         </div>
       )}
 
@@ -390,7 +391,7 @@ export default function Player() {
                 <span>{s.desc}</span>
               </div>
             ))}
-            <button className="btn btn--primary" onClick={() => setHelpOpen(false)}>Close</button>
+            <Button variant="primary" onClick={() => setHelpOpen(false)}>Close</Button>
           </div>
         </div>
       )}

@@ -1,3 +1,4 @@
+import Button from '../components/Button';
 import { Link } from "react-router-dom";
 
 function NotFound() {
@@ -13,9 +14,9 @@ function NotFound() {
           or maybe it went on vacation.
         </p>
 
-        <Link to="/" className="home-btn">
+        <Button as={Link} to="/" variant="primary">
           ← Back to Home
-        </Link>
+        </Button>
       </div>
     </main>
   );
