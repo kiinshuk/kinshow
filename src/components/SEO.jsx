@@ -7,6 +7,7 @@ export function SEO({ title, description, image, imageAlt, url, type = 'website'
   const t = title ? `${title} | Kinshow` : 'Kinshow - Cinema Discovery';
   const d = description || DEFAULT_DESC;
   const u = url || SITE;
+  const hasImage = Boolean(image);
   const img = image || `${SITE}/og-default.png`;
 
   return (
@@ -27,8 +28,8 @@ export function SEO({ title, description, image, imageAlt, url, type = 'website'
       <meta property="og:description" content={d} />
       <meta property="og:image" content={img} />
       <meta property="og:image:alt" content={imageAlt || title || 'Kinshow'} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      {!hasImage && <meta property="og:image:width" content="1200" />}
+      {!hasImage && <meta property="og:image:height" content="630" />}
       <meta property="og:url" content={u} />
       <meta property="og:site_name" content="Kinshow" />
       <meta property="og:locale" content="en_IN" />
@@ -48,12 +49,12 @@ export function SEO({ title, description, image, imageAlt, url, type = 'website'
         <meta key={tag} property="article:tag" content={tag} />
       ))}
 
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:card" content={hasImage ? 'summary_large_image' : 'summary'} />
       <meta name="twitter:site" content="@kinshow" />
       <meta name="twitter:title" content={t} />
       <meta name="twitter:description" content={d} />
-      <meta name="twitter:image" content={img} />
-      <meta name="twitter:image:alt" content={imageAlt || title || 'Kinshow'} />
+      {hasImage && <meta name="twitter:image" content={img} />}
+      {hasImage && <meta name="twitter:image:alt" content={imageAlt || title || 'Kinshow'} />}
     </Helmet>
   );
 }
