@@ -302,6 +302,8 @@ export default function Detail() {
             {showCastLeftFade && (
               <div className="cast-scroll-fade cast-scroll-fade--left" />
             )}
+            
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
             <div ref={castScrollRef} className="cast-scroll" tabIndex={0} role="list" onKeyDown={handleCastKeydown}>
               {data.cast.slice(0, 12).map((p, i) => (
                 <CastCard key={i} person={p} />

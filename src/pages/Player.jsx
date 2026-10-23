@@ -382,8 +382,8 @@ export default function Player() {
       )}
 
       {helpOpen && (
-        <div className="player-help-overlay" onClick={() => setHelpOpen(false)}>
-          <div className="player-help-modal" onClick={e => e.stopPropagation()}>
+        <div className="player-help-overlay" role="presentation" onClick={() => setHelpOpen(false)}>
+          <div className="player-help-modal" role="presentation" onClick={e => e.stopPropagation()}>
             <h3>Keyboard Shortcuts</h3>
             {SHORTCUTS.map(s => (
               <div className="player-help-row" key={s.keys}>

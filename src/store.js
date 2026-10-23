@@ -24,7 +24,7 @@ function useLocalStorage(key, initial) {
   const [val, setVal] = useState(() => {
     try { if (!ensureStorageVersion()) return initial; const d = localStorage.getItem('lg_' + key); return d ? JSON.parse(d) : initial; } catch { return initial; }
   });
-  useEffect(() => { try { if (!ensureStorageVersion()) return; localStorage.setItem('lg_' + key, JSON.stringify(val)); } catch {} }, [key, val]);
+  useEffect(() => { try { if (!ensureStorageVersion()) return; localStorage.setItem('lg_' + key, JSON.stringify(val)); } catch {/* ignore */} }, [key, val]);
   return [val, setVal];
 }
 

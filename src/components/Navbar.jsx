@@ -113,7 +113,7 @@ export default function Navbar({ watchlistCount }) {
   }, [saveSearch]);
 
   const go = (type, id) => { saveSearch(query); navigate(`/detail/${type}/${id}`); setSearchOpen(false); resetSearch(); };
-  const useSearchHistory = (value) => { setQuery(value); search(value); };
+  const applySearchHistory = (value) => { setQuery(value); search(value); };
   const isActive = (p) => location.pathname === p;
 
   return (
@@ -155,7 +155,7 @@ export default function Navbar({ watchlistCount }) {
         <Link to="/watchlist" className={`mobile-nav-item ${isActive('/watchlist') ? 'mobile-nav-item--active' : ''}`}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>My List</span></Link>
       </div>
       {searchOpen && (
-        <div className="search-overlay" onClick={(e) => { if (e.target === e.currentTarget) { setSearchOpen(false); resetSearch(); } }}>
+        <div className="search-overlay" role="presentation" onClick={(e) => { if (e.target === e.currentTarget) { setSearchOpen(false); resetSearch(); } }}>
           <div className="search-overlay-inner">
             <div className="search-overlay-input-wrap">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -204,7 +204,7 @@ export default function Navbar({ watchlistCount }) {
                 <div className="search-history-title">Recent searches</div>
                 {searchHistory.map(item => (
                   <div key={`${item.query}-${item.timestamp}`} className="search-history-item">
-                    <button className="search-history-query" onClick={() => useSearchHistory(item.query)}>
+                    <button className="search-history-query" onClick={() => applySearchHistory(item.query)}>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
                       <span>{item.query}</span>
                     </button>
