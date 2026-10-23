@@ -16,10 +16,10 @@ try {
       } catch { localStorage.removeItem(key); }
     }
   }
-} catch {}
+} catch {/* ignore */}
 
 const cache = (k) => { try { const d = JSON.parse(localStorage.getItem(PRE + k)); if (!d || Date.now() - d.t > TTL) { localStorage.removeItem(PRE + k); return null; } return d.v; } catch { return null; } };
-const save = (k, v) => { try { localStorage.setItem(PRE + k, JSON.stringify({ v, t: Date.now() })); } catch {} };
+const save = (k, v) => { try { localStorage.setItem(PRE + k, JSON.stringify({ v, t: Date.now() })); } catch {/* ignore */} };
 
 async function fetchJSON(url, ms = 12000) {
   const c = new AbortController();
