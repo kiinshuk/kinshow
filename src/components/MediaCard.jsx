@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { title as t, year as y, rating as r } from '../api';
 import { Link } from 'react-router-dom';
-import { PosterImg, makePoster } from '../utils/poster';
+import { PosterImg } from '../utils/poster';
 
 export default function MediaCard({ item, mediaType }) {
   const [isTouched, setIsTouched] = useState(false);

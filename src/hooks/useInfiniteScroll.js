@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 
 export function useInfiniteScroll(allItems, batchSize = 12) {
   const [visible, setVisible] = useState([]);
-  const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef(null);
   const pageRef = useRef(1);
@@ -11,7 +10,6 @@ export function useInfiniteScroll(allItems, batchSize = 12) {
     const next = allItems.slice(0, batchSize);
     setVisible(next);
     setHasMore(allItems.length > batchSize);
-    setPage(1);
     pageRef.current = 1;
   }, [allItems, batchSize]);
 
@@ -25,7 +23,6 @@ export function useInfiniteScroll(allItems, batchSize = 12) {
         const end = nextPage * batchSize;
         const next = allItems.slice(0, end);
         setVisible(next);
-        setPage(nextPage);
         pageRef.current = nextPage;
         setHasMore(end < allItems.length);
       }
