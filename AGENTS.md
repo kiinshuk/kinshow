@@ -9,7 +9,7 @@ sharp corners (`border-radius: 0`), accent `#1877f2`. Deployed on Vercel.
 
 - `npm run build` — prebuild fetches contributors, then `vite build` + prerender
 - `npm run contributors` — manually refresh `src/data/contributors.json`
-- No lint/typecheck configured.
+- Lint: `npm run lint` (ESLint flat config) must exit 0 errors; no typecheck configured.
 
 ## Merge checklist (important)
 

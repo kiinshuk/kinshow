@@ -32,7 +32,7 @@ Thanks for your interest in contributing! Here's how to get started.
 | `npm run preview` | Serve the production build (port 4173) |
 | `npm run contributors` | Refresh `src/data/contributors.json` manually |
 
-> There is currently **no lint script** — ESLint is tracked in [#157](https://github.com/kiinshuk/kinshow/issues/157). Your verification gate is: **`npm run build` passes.**
+> Run **`npm run lint`** (ESLint, flat config) — it must finish with **0 errors**; existing warnings are known debt you don't need to fix. Your merge gate is still: **`npm run build` passes.**
 
 ## Before Your First PR
 
