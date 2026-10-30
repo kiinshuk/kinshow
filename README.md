@@ -1,6 +1,6 @@
 # 🎬 Kinshow — Cinema Discovery Platform
 
-A free, open-source movie and TV show discovery platform. Browse 80+ curated films, 250+ TV shows, check ratings, cast info, episode guides, and find where to stream — all in one place.
+A free, open-source movie and TV show discovery platform. Browse 40+ curated films, 250+ TV shows, check ratings, cast info, episode guides, and find where to stream — all in one place.
 
 **Live:** [kinshow.vercel.app](https://kinshow.vercel.app/)  
 **Blog:** [kinshow.vercel.app/blog](https://kinshow.vercel.app/blog)
@@ -27,7 +27,7 @@ Then pick an issue tagged [`good first issue`](https://github.com/kiinshuk/kinsh
 ## ✨ Features
 
 ### Discovery
-- **80+ Curated Movies** — Top-rated films with ratings, cast, and streaming links
+- **40+ Curated Movies** — Top-rated films with ratings, cast, and streaming links
 - **250+ TV Shows** — Full season and episode guides from TVmaze
 - **Smart Search** — Instant search across movies and TV shows, with clear error/retry states when an API is unreachable
 - **Genre Explorer** — Browse by Action, Comedy, Drama, Horror, Sci-Fi, Thriller, and more

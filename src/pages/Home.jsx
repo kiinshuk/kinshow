@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <main id="content" tabIndex={-1} className="page">
-      <SEO title="Kinshow" description="Discover movies and TV shows on Kinshow. Browse ratings, cast, reviews, and find where to stream. Free cinema discovery with 80+ curated films and trending series." url="https://kinshow.vercel.app/" />
+      <SEO title="Kinshow" description="Discover movies and TV shows on Kinshow. Browse ratings, cast, reviews, and find where to stream. Free cinema discovery with 40+ curated films and trending series." url="https://kinshow.vercel.app/" />
       <StructuredData data={webSchema} />
       <StructuredData data={orgSchema} />
       <Hero />
