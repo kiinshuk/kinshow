@@ -188,14 +188,71 @@ export default function Player() {
   }, [navigate, toggleFullscreen, goEp, switchServer]);
 
   useEffect(() => {
+    // ─── Popup & tab-redirect shield ─────────────────────────────────
+    // (Defense for our own realm only: cross-origin player iframes are
+    // isolated by the browser — see AGENTS.md, we never sandbox them.)
+
+    // 1) Nothing on this page may open a window (popups/popunders)
     const originalOpen = window.open;
     window.open = () => null;
+
+    // 2) No anchor on this page may navigate to an external site —
+    //    neither as a new tab nor by replacing the player tab
     const blockExternal = (e) => {
-      const a = e.target.closest?.('a[target="_blank"]');
-      if (a && a.hostname !== window.location.hostname) e.preventDefault();
+      const a = e.target.closest?.('a[href]');
+      if (a && a.hostname && a.hostname !== window.location.hostname) e.preventDefault();
     };
     document.addEventListener('click', blockExternal, true);
-    return () => { window.open = originalOpen; document.removeEventListener('click', blockExternal, true); };
+
+    // 3) Frame-busting guard: cancel cross-origin top-frame redirects
+    //    (the Navigation API reports navigations initiated by child frames too)
+    const onNavigate = (e) => {
+      try {
+        if (e.destination?.url && new URL(e.destination.url).origin !== window.location.origin) {
+          e.preventDefault();
+        }
+      } catch { /* malformed destination — leave it to the browser */ }
+    };
+    const navApi = typeof window.navigation !== 'undefined' ? window.navigation : null;
+    navApi?.addEventListener('navigate', onNavigate);
+
+    // 4) Popup refocus: when a new window steals focus shortly after the user
+    //    interacted with the player (server switch, episode nav, arming click),
+    //    pull focus back. Throttled + self-cancelling so normal tab switching
+    //    is only ever fought right after an interaction.
+    let lastInteraction = 0;
+    let lastRefocus = 0;
+    let pendingRefocus = null;
+    const markInteraction = () => { lastInteraction = Date.now(); };
+    const onBlur = () => {
+      const now = Date.now();
+      if (now - lastInteraction > 3000 || now - lastRefocus < 15000) return;
+      pendingRefocus = setTimeout(() => {
+        pendingRefocus = null;
+        if (!document.hasFocus()) {
+          lastRefocus = Date.now();
+          window.focus();
+        }
+      }, 400);
+    };
+    const onFocus = () => {
+      if (pendingRefocus) { clearTimeout(pendingRefocus); pendingRefocus = null; }
+    };
+    window.addEventListener('pointerdown', markInteraction, true);
+    window.addEventListener('keydown', markInteraction, true);
+    window.addEventListener('blur', onBlur);
+    window.addEventListener('focus', onFocus);
+
+    return () => {
+      window.open = originalOpen;
+      document.removeEventListener('click', blockExternal, true);
+      navApi?.removeEventListener('navigate', onNavigate);
+      window.removeEventListener('pointerdown', markInteraction, true);
+      window.removeEventListener('keydown', markInteraction, true);
+      window.removeEventListener('blur', onBlur);
+      window.removeEventListener('focus', onFocus);
+      if (pendingRefocus) clearTimeout(pendingRefocus);
+    };
   }, []);
 
   useEffect(() => {
