@@ -87,6 +87,29 @@ html {
   --shadow-xl: 0 16px 50px rgba(20,24,35,0.2);
 }
 
+@media (prefers-contrast: more) {
+  :root:not([data-theme="light"]),
+  :root[data-theme="dark"] {
+    --border: rgba(255, 255, 255, 0.32);
+    --border-strong: rgba(255, 255, 255, 0.48);
+    --text-muted: #b8bac5;
+  }
+
+  :root[data-theme="light"] {
+    --border: rgba(20, 24, 35, 0.3);
+    --border-strong: rgba(20, 24, 35, 0.42);
+    --text-muted: #555b68;
+  }
+}
+
+@media (prefers-contrast: more) and (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --border: rgba(20, 24, 35, 0.3);
+    --border-strong: rgba(20, 24, 35, 0.42);
+    --text-muted: #555b68;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
