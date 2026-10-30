@@ -8,44 +8,9 @@ import {
   breadcrumbSchema,
 } from "../components/SEO";
 import CONTRIBUTORS from "../data/contributors.json";
+import { ABOUT_FAQ } from "../faqData.js";
 
-const FAQ_DATA = [
-  {
-    question: "What is Kinshow?",
-    answer:
-      "Kinshow is a free cinema discovery platform that helps you find movies and TV shows. We provide ratings, cast information, reviews, and streaming availability all in one place.",
-  },
-  {
-    question: "Is Kinshow free to use?",
-    answer:
-      "Yes, Kinshow is completely free to use. We do not charge any fees for browsing movies, TV shows, or using features like the watchlist and viewing history.",
-  },
-  {
-    question: "Does Kinshow host any content?",
-    answer:
-      "No, Kinshow does not host, stream, or distribute any copyrighted content. We aggregate data from third-party APIs (TVmaze, OMDb) and redirect to authorized streaming services.",
-  },
-  {
-    question: "How do I create a watchlist on Kinshow?",
-    answer:
-      'Simply click the "+ Add to List" button on any movie or TV show detail page. Your watchlist is saved locally in your browser and accessible from the My List page.',
-  },
-  {
-    question: "What data sources does Kinshow use?",
-    answer:
-      "Kinshow uses TVmaze API for TV show data, OMDb API for movie ratings and posters, and IMDb for identification. All data belongs to their respective owners.",
-  },
-  {
-    question: "Is Kinshow available on mobile?",
-    answer:
-      "Yes, Kinshow is fully responsive and works on all devices including smartphones, tablets, and desktop browsers.",
-  },
-  {
-    question: "How do I report a bug or suggest a feature?",
-    answer:
-      "You can contact us via email at kinshuksharma2024@gmail.com or open an issue on our GitHub repository at github.com/kiinshuk/kinshow.",
-  },
-];
+const FAQ_DATA = ABOUT_FAQ;
 
 const FEATURES = [
   {

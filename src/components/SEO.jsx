@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 const SITE = 'https://kinshow.vercel.app';
 const DEFAULT_DESC = 'Discover movies and TV shows on Kinshow. Explore ratings, cast, reviews, and find where to stream.';
 
-export function SEO({ title, description, image, imageAlt, url, type = 'website', article }) {
+export function SEO({ title, description, image, imageAlt, url, type = 'website', article, noindex }) {
   const t = title ? `${title} | Kinshow` : 'Kinshow - Cinema Discovery';
   const d = description || DEFAULT_DESC;
   const u = url || SITE;
@@ -14,7 +14,7 @@ export function SEO({ title, description, image, imageAlt, url, type = 'website'
       <title>{t}</title>
       <meta name="description" content={d} />
       <link rel="canonical" href={u} />
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
       <meta name="theme-color" content="#c8102e" />
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-capable" content="yes" />

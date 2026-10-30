@@ -1,0 +1,39 @@
+# Kinshow
+
+> Kinshow is a free, open-source cinema discovery platform for movies and TV shows. Browse ratings, cast, synopses, episode guides and streaming availability, and keep a personal watchlist — no sign-up, no fees.
+
+Kinshow is a client-side React + Vite app deployed at https://kinshow.vercel.app and maintained in the open at https://github.com/kiinshuk/kinshow. Catalog data comes from the TVmaze API (TV shows) and the OMDb API (movies); every title is identified by its IMDb ID (for example `tt0111161`). Kinshow does not host, stream, or distribute any copyrighted content — it aggregates metadata and links out.
+
+## Key pages
+
+- [Home](https://kinshow.vercel.app/): trending TV shows, new movie releases, and top-rated films
+- [Movies](https://kinshow.vercel.app/movies): browse 40+ curated movies — popular, new, and top-rated
+- [TV Shows](https://kinshow.vercel.app/tv): trending and popular TV series with episode guides
+- [Explore](https://kinshow.vercel.app/explore): filter movies and TV by genre (Action, Comedy, Drama, Horror, Sci-Fi, Thriller, and more)
+- [Blog](https://kinshow.vercel.app/blog): movie and TV guides, lists, and explainers
+- [About](https://kinshow.vercel.app/about): what Kinshow is, features, data sources, FAQ
+- [Contact](https://kinshow.vercel.app/contact): support, bug reports, feature requests
+- [Privacy Policy](https://kinshow.vercel.app/privacy): how Kinshow handles data
+
+## Facts
+
+- Price: free; no account or sign-up required
+- Watchlists and viewing history are stored locally in the user's browser (localStorage)
+- Catalog: 40+ curated movies (2024–2026 most-searched titles plus evergreen classics) and trending TV series
+- Ratings are sourced from IMDb via OMDb on a 10-point scale
+- Open source: MIT-licensed repository with 300+ open issues, ~330 tagged "good first issue"
+- Community: contributions welcome via GitHub pull requests
+
+## FAQ
+
+- **Is Kinshow free?** Yes, Kinshow is completely free to use with no fees or sign-up.
+- **Does Kinshow host or stream content?** No. It aggregates metadata from TVmaze and OMDb and never hosts, streams, or distributes copyrighted content.
+- **How do I save a movie?** Use the "+ Add to List" button on any title's detail page; the watchlist is saved in your browser.
+- **Where does the data come from?** TVmaze API for TV shows, OMDb API for movies, IMDb for title identification.
+- **How do I report a bug or suggest a feature?** Email kinshuksharma2024@gmail.com or open a GitHub issue at https://github.com/kiinshuk/kinshow/issues.
+
+## Optional
+
+- [GitHub repository](https://github.com/kiinshuk/kinshow)
+- [Sitemap](https://kinshow.vercel.app/sitemap.xml)
+- [Full site context for language models (llms-full.txt)](https://kinshow.vercel.app/llms-full.txt)

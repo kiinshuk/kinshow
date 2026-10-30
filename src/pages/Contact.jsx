@@ -1,12 +1,8 @@
 import Button from '../components/Button';
 import { SEO, StructuredData, faqSchema, breadcrumbSchema } from '../components/SEO';
+import { CONTACT_FAQ } from '../faqData.js';
 
-const FAQ_DATA = [
-  { question: 'How do I contact Kinshow support?', answer: 'You can reach us via email at kinshuksharma2024@gmail.com or by opening an issue on our GitHub repository at github.com/kiinshuk/kinshow.' },
-  { question: 'How do I report a bug on Kinshow?', answer: 'Please email us with steps to reproduce the bug, expected behavior, and screenshots if possible. You can also open a GitHub issue for faster resolution.' },
-  { question: 'Can I suggest a new feature for Kinshow?', answer: 'Absolutely! We welcome feature suggestions. Email us or create a GitHub issue describing the feature you\'d like to see and why it would be useful.' },
-  { question: 'What is the response time for inquiries?', answer: 'We aim to respond to all inquiries within 48 hours. For urgent issues, using GitHub Issues provides faster resolution.' }
-];
+const FAQ_DATA = CONTACT_FAQ;
 
 export default function Contact() {
   return (

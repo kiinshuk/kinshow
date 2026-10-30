@@ -1,6 +1,18 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join } from 'path';
 import { BLOG_POSTS } from './src/blogData.js';
+import { ABOUT_FAQ, CONTACT_FAQ } from './src/faqData.js';
+
+// FAQPage JSON-LD shared with the React pages (src/faqData.js is the single source)
+const faqPage = list => JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: list.map(q => ({
+    '@type': 'Question',
+    name: q.question,
+    acceptedAnswer: { '@type': 'Answer', text: q.answer }
+  }))
+});
 
 const DIST = join(process.cwd(), 'dist');
 const indexHtml = readFileSync(join(DIST, 'index.html'), 'utf-8');
@@ -59,7 +71,7 @@ const routes = [
   {
     path: '/',
     title: 'Kinshow - Cinema Discovery | Movies & TV Shows',
-    description: 'Discover movies and TV shows on Kinshow. Browse ratings, cast, reviews, and find where to stream. Free cinema discovery platform with 80+ curated films and trending series.',
+    description: 'Discover movies and TV shows on Kinshow. Browse ratings, cast, reviews, and find where to stream. Free cinema discovery with 40+ curated films and trending series.',
     canonical: 'https://kinshow.vercel.app/',
     type: 'website',
     content: `
@@ -71,7 +83,7 @@ const routes = [
   {
     path: '/movies',
     title: 'Movies - Kinshow',
-    description: 'Browse 80+ curated movies with ratings, cast info, and streaming links. Find popular, top rated, and new releases. Free movie discovery on Kinshow.',
+    description: 'Browse 40+ curated movies with ratings, cast info, and streaming links. Find popular, top rated, and new releases. Free movie discovery on Kinshow.',
     canonical: 'https://kinshow.vercel.app/movies',
     type: 'website',
     content: `
@@ -110,7 +122,7 @@ const routes = [
     content: `
       <h1 style="position:absolute;left:-9999px">About Kinshow</h1>
       <p style="position:absolute;left:-9999px">Kinshow is a free cinema discovery platform designed to help you find your next favorite movie or TV show. Browse ratings, cast information, and streaming availability.</p>
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Kinshow?","acceptedAnswer":{"@type":"Answer","text":"Kinshow is a free cinema discovery platform that helps you find movies and TV shows."}},{"@type":"Question","name":"Is Kinshow free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes, Kinshow is completely free to use."}},{"@type":"Question","name":"Does Kinshow host any content?","acceptedAnswer":{"@type":"Answer","text":"No, Kinshow does not host, stream, or distribute any copyrighted content."}},{"@type":"Question","name":"How do I create a watchlist on Kinshow?","acceptedAnswer":{"@type":"Answer","text":"Click the Add to List button on any movie or TV show detail page."}},{"@type":"Question","name":"What data sources does Kinshow use?","acceptedAnswer":{"@type":"Answer","text":"Kinshow uses TVmaze API for TV shows, OMDb API for movies, and IMDb for identification."}},{"@type":"Question","name":"Is Kinshow available on mobile?","acceptedAnswer":{"@type":"Answer","text":"Yes, Kinshow is fully responsive and works on all devices."}},{"@type":"Question","name":"How do I report a bug?","acceptedAnswer":{"@type":"Answer","text":"Email us at kinshuksharma2024@gmail.com or open a GitHub issue."}}]}</script>
+      <script type="application/ld+json">${faqPage(ABOUT_FAQ)}</script>
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"About","item":"https://kinshow.vercel.app/about"}]}</script>`
   },
   {
@@ -122,7 +134,7 @@ const routes = [
     content: `
       <h1 style="position:absolute;left:-9999px">Contact Us</h1>
       <p style="position:absolute;left:-9999px">Get in touch with the Kinshow team. Email us at kinshuksharma2024@gmail.com or visit our GitHub repository.</p>
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I contact Kinshow support?","acceptedAnswer":{"@type":"Answer","text":"Email us at kinshuksharma2024@gmail.com or open a GitHub issue."}},{"@type":"Question","name":"How do I report a bug?","acceptedAnswer":{"@type":"Answer","text":"Email us with steps to reproduce or open a GitHub issue."}},{"@type":"Question","name":"Can I suggest a new feature?","acceptedAnswer":{"@type":"Answer","text":"Absolutely! Email us or create a GitHub issue."}},{"@type":"Question","name":"What is the response time?","acceptedAnswer":{"@type":"Answer","text":"We aim to respond within 48 hours."}}]}</script>
+      <script type="application/ld+json">${faqPage(CONTACT_FAQ)}</script>
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://kinshow.vercel.app/contact"}]}</script>`
   },
   {

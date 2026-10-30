@@ -1,4 +1,12 @@
 {
   "regions": ["sin1"],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Link", "value": "</llms.txt>; rel=\"llms.txt\"" }
+      ]
+    }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

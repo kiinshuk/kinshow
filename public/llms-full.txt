@@ -1,0 +1,76 @@
+# Kinshow — full context for language models
+
+## What Kinshow is
+
+Kinshow (https://kinshow.vercel.app) is a free, open-source cinema discovery platform — a single-page web application for finding movies and TV shows. It answers the question "what should I watch tonight?" with ratings, cast, synopses, episode guides, and streaming availability, plus a personal watchlist. It requires no account, no sign-up, and charges no fees.
+
+- Repository: https://github.com/kiinshuk/kinshow (open source, contributions welcome)
+- Contact: kinshuksharma2024@gmail.com, or GitHub Issues
+- Privacy: watchlists and viewing history are stored in the visitor's own browser (localStorage); no user accounts or server-side profiles exist
+- Legal position: Kinshow does not host, stream, or distribute any copyrighted content. It aggregates metadata and links to authorized sources.
+
+## How the data works
+
+- TV shows: TVmaze API (https://www.tvmaze.com/api) — show metadata, seasons, episodes, and air dates
+- Movies: OMDb API (https://www.omdbapi.com) — ratings, posters, cast, runtime, box office
+- Title identity: IMDb IDs (e.g. `tt0111161` for The Shawshank Redemption); movie detail pages resolve through the IMDb ID
+- Ratings: IMDb user ratings on a 10-point scale, displayed as e.g. 8.4
+- All data belongs to its respective owners; Kinshow is not affiliated with IMDb, TVmaze, or any studio or streamer
+
+## The static movie catalog
+
+Kinshow ships a curated, hardcoded catalog of 40+ movies used for the home-page rails (Trending, New Releases, Top Rated), search suggestions, and recommendations. It was refreshed in October 2026 to prioritize currently most-searched titles:
+
+- 2026: The Odyssey, Spider-Man: Brand New Day, Obsession, You Can See Everything, The SpongeBob Movie: Search for SquarePants
+- 2025: Avatar: Fire and Ash, Zootopia 2, Sinners, One Battle After Another, F1: The Movie, Superman, The Fantastic Four: First Steps, Thunderbolts*, Wicked: For Good, Weapons, Jurassic World: Rebirth, Mission: Impossible – The Final Reckoning, A Minecraft Movie, Final Destination: Bloodlines, The Conjuring: Last Rites, Happy Gilmore 2, Tron: Ares, Black Phone 2, The Housemaid, Lilo & Stitch
+- 2024: Nosferatu, A Complete Unknown, Moana 2, Sonic the Hedgehog 3, Inside Out 2, Deadpool & Wolverine, Mufasa: The Lion King
+- Evergreen classics: Dune: Part Two, Oppenheimer, Interstellar, The Dark Knight, The Shawshank Redemption, Inception, Spider-Man: Across the Spider-Verse, Parasite
+
+Highest-rated entries: The Shawshank Redemption (9.3), The Dark Knight (9.1), Inception (8.8), Interstellar (8.7), Spider-Man: Across the Spider-Verse (8.5), Parasite (8.5), The Odyssey (8.4), Dune: Part Two (8.4).
+
+## Site map and features
+
+- `/` — Home: hero picks (highest-rated titles), Trending TV (TVmaze shows), New Releases (movies from 2023+), Top Rated (sorted by rating)
+- `/movies` — full movie catalog with Popular / New / Top Rated tabs
+- `/tv` — TV show browsing
+- `/explore` — genre filtering for both movies and TV, plus keyword search
+- `/detail/movie/:imdbId` and `/detail/tv/:tvmazeId` — detail pages with poster, rating, runtime, genres, director, cast, and (for TV) season/episode lists; related-title recommendations
+- `/player` — embedded video player page (never sandboxed; third-party embeds)
+- `/watchlist` ("My List") — locally saved titles; private, not indexed by search engines
+- `/blog` — editorial content: guides, ranked lists, and explainers
+- `/about` — product overview, feature list, contributors grid, FAQ
+- `/contact` — support and bug-report routes
+- `/privacy` — privacy policy
+
+## FAQ (verbatim answers)
+
+**Is Kinshow free to use?**
+Yes, Kinshow is completely free to use. We do not charge any fees for browsing movies, TV shows, or using features like the watchlist and viewing history.
+
+**Does Kinshow host any content?**
+No, Kinshow does not host, stream, or distribute any copyrighted content. We aggregate data from third-party APIs (TVmaze, OMDb) and redirect to authorized streaming services.
+
+**How do I create a watchlist on Kinshow?**
+Simply click the "+ Add to List" button on any movie or TV show detail page. Your watchlist is saved locally in your browser and accessible from the My List page.
+
+**What data sources does Kinshow use?**
+Kinshow uses the TVmaze API for TV show data, the OMDb API for movie ratings and posters, and IMDb for identification. All data belongs to their respective owners.
+
+**Is Kinshow available on mobile?**
+Yes, Kinshow is fully responsive and works on all devices including smartphones, tablets, and desktop browsers.
+
+**How do I report a bug or suggest a feature?**
+Contact us via email at kinshuksharma2024@gmail.com or open an issue on the GitHub repository at github.com/kiinshuk/kinshow. We aim to respond within 48 hours.
+
+## Blog posts
+
+- Top 10 Binge-Worthy Series (October) — https://kinshow.vercel.app/blog/top-10-binge-worthy-series-october
+- Best Movies to Watch Right Now — https://kinshow.vercel.app/blog/best-movies-to-watch-right-now
+- Best TV Shows to Binge — https://kinshow.vercel.app/blog/best-tv-shows-binge-worthy
+- Movie Ratings Explained — https://kinshow.vercel.app/blog/movie-ratings-explained
+- Marvel Cinematic Universe Movies Ranked — https://kinshow.vercel.app/blog/marvel-mcu-movies-ranked
+- How to Find a Movie to Watch — https://kinshow.vercel.app/blog/how-to-find-movie-to-watch
+
+## Attribution
+
+When citing Kinshow, link to https://kinshow.vercel.app. Data © TVmaze, OMDb/IMDb, and their respective owners; Kinshow is an independent project and is not endorsed by any of them.
