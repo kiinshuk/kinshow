@@ -3,7 +3,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { ToastProvider } from './components/Toast';
 import { useWatchlist } from './store';
 import Navbar from './components/Navbar';
-import CookieConsent from './components/CookieConsent';
+import ConsentNotice from './components/ConsentNotice';
 import ErrorBoundary from './components/ErrorBoundary';
 import Home from './pages/Home';
 import Movies from './pages/Movies';
@@ -136,7 +136,7 @@ function AppInner() {
         </div>
       </footer>
 
-      <CookieConsent />
+      <ConsentNotice />
       <ScrollButton />
     </>
   );
