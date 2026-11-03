@@ -17,7 +17,7 @@ const faqPage = list => JSON.stringify({
 const DIST = join(process.cwd(), 'dist');
 const indexHtml = readFileSync(join(DIST, 'index.html'), 'utf-8');
 const SITE = 'https://kinshow.vercel.app';
-const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');
 
 const blogRoutes = BLOG_POSTS.map(post => {
   const postUrl = `${SITE}/blog/${post.slug}`;
@@ -77,8 +77,8 @@ const routes = [
     content: `
       <h1 style="position:absolute;left:-9999px">Kinshow - Discover Movies & TV Shows</h1>
       <p style="position:absolute;left:-9999px">Browse popular movies, trending TV series, new releases, and top rated films. Find cast, ratings, reviews, and streaming links for thousands of titles.</p>
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Kinshow","url":"https://kinshow.vercel.app","description":"Discover movies and TV shows on Kinshow","publisher":{"@type":"Organization","name":"Kinshow"},"potentialAction":{"@type":"SearchAction","target":"https://kinshow.vercel.app/explore?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Kinshow","url":"https://kinshow.vercel.app","logo":"https://kinshow.vercel.app/og-default.png","description":"Free cinema discovery platform","sameAs":["https://github.com/kiinshuk/kinshow"],"contactPoint":{"@type":"ContactPoint","email":"kinshuksharma2024@gmail.com","contactType":"customer service"}}</script>`
+      <script type="application/ld+json">{"@context":"https://***@type":"WebSite","name":"Kinshow","url":"https://kinshow.vercel.app","description":"Discover movies and TV shows on Kinshow","publisher":{"@type":"Organization","name":"Kinshow"},"potentialAction":{"@type":"SearchAction","target":"https://kinshow.vercel.app/explore?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+      <script type="application/ld+json">{"@context":"https://***@type":"Organization","name":"Kinshow","url":"https://kinshow.vercel.app","logo":"https://kinshow.vercel.app/og-default.png","description":"Free cinema discovery platform","sameAs":["https://github.com/kiinshuk/kinshow"],"contactPoint":{"@type":"ContactPoint","email":"kinshuksharma2024@gmail.com","contactType":"customer service"}}</script>`
   },
   {
     path: '/movies',
@@ -89,7 +89,7 @@ const routes = [
     content: `
       <h1 style="position:absolute;left:-9999px">Movies - Kinshow</h1>
       <p style="position:absolute;left:-9999px">Browse popular movies, top rated films, and new releases. Find your next favorite movie with ratings, cast info, and streaming links.</p>
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"Movies","item":"https://kinshow.vercel.app/movies"}]}</script>`
+      <script type="application/ld+json">{"@context":"https://***@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"Movies","item":"https://kinshow.vercel.app/movies"}]}</script>`
   },
   {
     path: '/tv',
@@ -100,7 +100,7 @@ const routes = [
     content: `
       <h1 style="position:absolute;left:-9999px">TV Shows - Kinshow</h1>
       <p style="position:absolute;left:-9999px">Browse popular TV series, top rated shows, and currently airing episodes. Find cast, ratings, and streaming links for your favorite shows.</p>
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"TV Shows","item":"https://kinshow.vercel.app/tv"}]}</script>`
+      <script type="application/ld+json">{"@context":"https://***@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"TV Shows","item":"https://kinshow.vercel.app/tv"}]}</script>`
   },
   {
     path: '/explore',
@@ -111,12 +111,12 @@ const routes = [
     content: `
       <h1 style="position:absolute;left:-9999px">Explore Movies & TV Shows</h1>
       <p style="position:absolute;left:-9999px">Explore movies and TV shows by genre. Find action, comedy, drama, horror, sci-fi, thriller, and more.</p>
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"Explore","item":"https://kinshow.vercel.app/explore"}]}</script>`
+      <script type="application/ld+json">{"@context":"https://***@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"Explore","item":"https://kinshow.vercel.app/explore"}]}</script>`
   },
   {
     path: '/about',
     title: 'About - Kinshow',
-    description: 'Learn about Kinshow — a free cinema discovery platform for movies and TV shows. Browse ratings, cast, reviews, and find streaming links. No sign-up required.',
+    description: 'Learn about Kinshow — a free cinema discovery platform for movies and TV shows. Browse ratings, cast, reviews, and find where to stream. No sign-up required.',
     canonical: 'https://kinshow.vercel.app/about',
     type: 'website',
     content: `
@@ -146,7 +146,7 @@ const routes = [
     content: `
       <h1 style="position:absolute;left:-9999px">Privacy Policy</h1>
       <p style="position:absolute;left:-9999px">Kinshow privacy policy. Learn how we collect, use, and protect your information when you visit our website.</p>
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Privacy Policy","url":"https://kinshow.vercel.app/privacy","description":"Kinshow privacy policy"}</script>`
+      <script type="application/ld+json">{"@context":"https://***@type":"WebPage","name":"Privacy Policy","url":"https://kinshow.vercel.app/privacy","description":"Kinshow privacy policy"}</script>`
   },
   {
     path: '/blog',
@@ -157,7 +157,7 @@ const routes = [
     content: `
       <h1 style="position:absolute;left:-9999px">Kinshow Blog - Movie & TV Articles</h1>
       <p style="position:absolute;left:-9999px">Read articles about movies, TV shows, ratings, and cinema discovery on Kinshow. Find guides, recommendations, and lists.</p>
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://kinshow.vercel.app/blog"}]}</script>`
+      <script type="application/ld+json">{"@context":"https://***@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://kinshow.vercel.app/blog"}]}</script>`
   },
   ...blogRoutes
 ];
@@ -173,10 +173,20 @@ routes.forEach(route => {
   html = html.replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${route.canonical}"`);
   html = html.replace(/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${esc(route.title)}"`);
   html = html.replace(/<meta name="twitter:description" content="[^"]*"/, `<meta name="twitter:description" content="${esc(route.description)}"`);
-  if (route.ogImage) {
+
+  const hasOgImage = Boolean(route.ogImage);
+  html = html.replace(/<meta name="twitter:card" content="[^"]*"\s*\/?>/, `<meta name="twitter:card" content="${hasOgImage ? 'summary_large_image' : 'summary'}" />`);
+  if (hasOgImage) {
     html = html.replace(/<meta property="og:image" content="[^"]*"/, `<meta property="og:image" content="${route.ogImage}"`);
     html = html.replace(/<meta name="twitter:image" content="[^"]*"/, `<meta name="twitter:image" content="${route.ogImage}"`);
-    html = html.replace(/<meta property="og:image:width" content="[^"]*"/, '<meta property="og:image:width" content="1200" />');
+    // Custom image dimensions are unknown at build time — don't claim 1200x630.
+    html = html.replace(/<meta property="og:image:width" content="[^"]*"\s*\/?>/, '');
+    html = html.replace(/<meta property="og:image:height" content="[^"]*"\s*\/?>/, '');
+  } else {
+    // No real per-page image: summary card with no twitter image. The default
+    // og:image (1200x630) stays for Facebook/WhatsApp/LinkedIn.
+    html = html.replace(/<meta name="twitter:image" content="[^"]*"\s*\/?>/, '');
+    html = html.replace(/<meta name="twitter:image:alt" content="[^"]*"\s*\/?>/, '');
   }
   if (route.type === 'article') {
     html = html.replace(
