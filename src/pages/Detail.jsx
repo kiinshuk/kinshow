@@ -126,23 +126,27 @@ export default function Detail() {
 
   useEffect(() => {
     if (!data) return;
+
+    // Lowercase the current genres once and store them in a Set for fast lookup
+    const currentGenres = new Set((data.genres || []).map(g => g.name.toLowerCase()));
+    const countOverlap = (genres) =>
+      (genres || []).filter(g => currentGenres.has(g.name.toLowerCase())).length;
+
     if (type === 'movie') {
-      const currentGenres = (data.genres || []).map(g => g.name.toLowerCase());
       const recs = MOVIES
         .filter(m => String(m.id) !== String(data.id))
-        .map(m => ({ ...m, media_type: 'movie', overlap: (m.genres || []).filter(g => currentGenres.includes(g.name.toLowerCase())).length }))
+        .map(m => ({ ...m, media_type: 'movie', overlap: countOverlap(m.genres) }))
         .filter(m => m.overlap > 0)
         .sort((a, b) => b.overlap - a.overlap)
         .slice(0, 12);
       setRecommended(recs);
     } else {
       const tvmazeId = data.tvmazeId || Number(id);
-      const currentGenres = (data.genres || []).map(g => g.name.toLowerCase());
       Promise.all([tvmazeShowsByPage(1), tvmazeShowsByPage(2), tvmazeShowsByPage(3)]).then(pages => {
         const all = pages.flat();
         const recs = all
           .filter(s => s.id !== tvmazeId)
-          .map(s => ({ ...s, overlap: (s.genres || []).filter(g => currentGenres.includes(g.name.toLowerCase())).length }))
+          .map(s => ({ ...s, overlap: countOverlap(s.genres) }))
           .filter(s => s.overlap > 0)
           .sort((a, b) => b.overlap - a.overlap)
           .slice(0, 12);
