@@ -10,13 +10,17 @@ export default function BlogPost() {
   if (!post) {
     return (
       <main id="content" tabIndex={-1} className="page">
-        <div className="empty-state">
-        <EmptyState 
-  title="No Results Found"
-  description="We couldn't find the data you were looking for."
-  action={<Button as={Link} to="/blog" variant="secondary">Back to Blog</Button>}
-/>
-        </div>
+        <SEO
+          title="Post not found"
+          description="This article does not exist or has been moved. Browse all Kinshow blog articles instead."
+          url="https://kinshow.vercel.app/blog"
+          noindex
+        />
+        <EmptyState
+          title="Post not found"
+          description="This article does not exist or has been moved. Browse all blog articles instead."
+          action={<Button as={Link} to="/blog" variant="secondary">Back to Blog</Button>}
+        />
       </main>
     );
   }
