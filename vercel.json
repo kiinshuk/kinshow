@@ -8,5 +8,8 @@
       ]
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/blog/:slug*", "destination": "/blog/_not-found" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }

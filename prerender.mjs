@@ -159,6 +159,29 @@ const routes = [
       <p style="position:absolute;left:-9999px">Read articles about movies, TV shows, ratings, and cinema discovery on Kinshow. Find guides, recommendations, and lists.</p>
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kinshow.vercel.app/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://kinshow.vercel.app/blog"}]}</script>`
   },
+  {
+    // Shell served for an unknown /blog/<slug> (see the rewrite in vercel.json),
+    // so the 404 state is visible before React loads.
+    path: '/blog/_not-found',
+    title: 'Post not found | Kinshow',
+    description: 'This article does not exist or has been moved. Browse all Kinshow blog articles instead.',
+    canonical: 'https://kinshow.vercel.app/blog',
+    type: 'website',
+    noindex: true,
+    content: `
+      <div class="empty-state">
+        <div class="empty-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <h3>Post not found</h3>
+        <p>This article does not exist or has been moved. Browse all blog articles instead.</p>
+        <a class="btn btn--secondary" href="/blog">Back to Blog</a>
+      </div>`
+  },
   ...blogRoutes
 ];
 
@@ -183,6 +206,9 @@ routes.forEach(route => {
       /<meta property="og:type" content="[^"]*"\s*\/>/,
       `<meta property="og:type" content="article" />\n    <meta property="article:published_time" content="${route.publishedTime}" />\n    <meta property="article:modified_time" content="${route.modifiedTime}" />\n    <meta property="article:section" content="${esc(route.section)}" />`
     );
+  }
+  if (route.noindex) {
+    html = html.replace('</head>', '  <meta name="robots" content="noindex, nofollow" />\n  </head>');
   }
   html = html.replace('<div id="root"></div>', `<div id="root">${route.content}</div>`);
 
